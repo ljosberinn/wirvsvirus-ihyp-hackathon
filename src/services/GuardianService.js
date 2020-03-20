@@ -3,7 +3,7 @@ import { Guardian } from './entities/Guardian';
 
 /**
  * Returns all existing guardians.
- * @return Promise<Guardian[]>
+ * @return {Promise<Guardian[]>}
  */
 export async function getAllGuardians() {
   const request = await httpRequest({

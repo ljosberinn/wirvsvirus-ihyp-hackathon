@@ -3,7 +3,7 @@ import { Offer } from './entities/Offer';
 
 /**
  * Returns all existing offers.
- * @return Promise<Offer[]>
+ * @return {Promise<Offer[]>}
  */
 export async function getAllOffers() {
   const request = await httpRequest({
