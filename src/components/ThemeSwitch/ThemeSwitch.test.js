@@ -27,11 +27,11 @@ describe('<ThemeSwitch />', () => {
       const button = getByTestId('toggle-theme');
       const switchElement = getByTestId('theme-switch');
 
-      expect(switchElement.checked).toBeFalsy();
+      expect(switchElement.checked).toBe(true);
 
       fireEvent.click(button);
 
-      expect(switchElement.checked).toBeTruthy();
+      expect(switchElement.checked).toBe(false);
     });
 
     test(`it indicates the active theme visually in ${origin}`, () => {
@@ -41,13 +41,13 @@ describe('<ThemeSwitch />', () => {
       const sun = getByTestId('sun');
       const moon = getByTestId('moon');
 
-      expect(sun.classList.contains(primaryColorClassName)).toBeTruthy();
-      expect(moon.classList.contains(primaryColorClassName)).toBeFalsy();
+      expect(moon.classList.contains(primaryColorClassName)).toBeTruthy();
+      expect(sun.classList.contains(primaryColorClassName)).toBeFalsy();
 
       fireEvent.click(button);
 
-      expect(sun.classList.contains(primaryColorClassName)).toBeFalsy();
-      expect(moon.classList.contains(primaryColorClassName)).toBeTruthy();
+      expect(moon.classList.contains(primaryColorClassName)).toBeFalsy();
+      expect(sun.classList.contains(primaryColorClassName)).toBeTruthy();
     });
   });
 });

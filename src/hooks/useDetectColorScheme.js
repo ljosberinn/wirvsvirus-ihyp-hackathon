@@ -13,11 +13,11 @@ const colorSchemes = {
 };
 
 const getInitialScheme = () => {
-  if (window.matchMedia && window.matchMedia(colorSchemes.DARK).matches) {
-    return THEME_NAMES.DARK;
+  if (window.matchMedia && window.matchMedia(colorSchemes.LIGHT).matches) {
+    return THEME_NAMES.LIGHT;
   }
 
-  return THEME_NAMES.LIGHT;
+  return THEME_NAMES.DARK;
 };
 
 export default function useDetectColorScheme() {
