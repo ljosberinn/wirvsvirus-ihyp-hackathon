@@ -1,5 +1,7 @@
 {
   "login": "Login",
   "contribute": "Mitwirken",
-  "logout": "Logout"
+  "logout": "Logout",
+  "toggleMenu": "Menü ein-/ausklappen",
+  "toggleNavigation": "Navigation ein-/ausklappen"
 }
