@@ -2,13 +2,13 @@
 [![dependencies][dependencies-image] ][dependencies-url]
 [![devdependencies][devdependencies-image] ][devdependencies-url]
 
-[dependencies-image]: https://david-dm.org/ljosberinn/personal-react-boilerplate.png
-[dependencies-url]: https://david-dm.org/ljosberinn/personal-react-boilerplate
-[devdependencies-image]: https://david-dm.org/ljosberinn/personal-react-boilerplate/dev-status.png
-[devdependencies-url]: https://david-dm.org/ljosberinn/personal-react-boilerplate#info=devDependencies
-[netlify-image]: https://api.netlify.com/api/v1/badges/20ce39dc-d1d4-4bb9-a5ee-6c3d613e3ed6/deploy-status
-[netlify-url]: https://app.netlify.com/sites/personal-react-boilerplate/deploys
-[license-badge]: https://img.shields.io/github/license/ljosberinn/personal-react-boilerplate
+[dependencies-image]: https://david-dm.org/ljosberinn/wirvsvirus-ihyp-hackathon.png
+[dependencies-url]: https://david-dm.org/ljosberinn/wirvsvirus-ihyp-hackathon
+[devdependencies-image]: https://david-dm.org/ljosberinn/wirvsvirus-ihyp-hackathon/dev-status.png
+[devdependencies-url]: https://david-dm.org/ljosberinn/wirvsvirus-ihyp-hackathon#info=devDependencies
+[netlify-image]: https://api.netlify.com/api/v1/badges/b0f26055-bf1d-4448-b31d-ac8a9869fd04/deploy-status
+[netlify-url]: https://app.netlify.com/sites/wirvsvirus-ihyp-hackathon/deploys
+[license-badge]: https://img.shields.io/github/license/ljosberinn/wirvsvirus-ihyp-hackathon
 
 [![License][license-badge]][license-badge]
 
