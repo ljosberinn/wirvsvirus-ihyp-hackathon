@@ -1,4 +1,5 @@
 import { httpRequest } from '../utils/httpRequest';
+import { Guardian } from './entities/Guardian';
 
 /**
  * Returns all existing guardians.
@@ -8,6 +9,7 @@ export async function getAllGuardians() {
   const request = await httpRequest({
     method: 'GET',
     path: '/api/guardians',
+    type: Guardian,
   });
   return request.response;
 }
@@ -21,6 +23,7 @@ export async function getGuardian(id) {
   const request = await httpRequest({
     method: 'GET',
     path: `/api/guardians/${id}`,
+    type: Guardian,
   });
   return request.response;
 }
@@ -47,6 +50,7 @@ export async function createGuardian(guardian) {
     method: 'POST',
     path: `/api/guardians`,
     body: guardian,
+    type: Guardian,
   });
   return request.response;
 }

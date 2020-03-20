@@ -1,4 +1,5 @@
 import { httpRequest } from '../utils/httpRequest';
+import { Reward } from './entities/Reward';
 
 /**
  * Returns all existing rewards.
@@ -8,6 +9,7 @@ export async function getAllRewards() {
   const request = await httpRequest({
     method: 'GET',
     path: '/api/rewards',
+    type: Reward,
   });
   return request.response;
 }
@@ -21,6 +23,7 @@ export async function getReward(id) {
   const request = await httpRequest({
     method: 'GET',
     path: `/api/rewards/${id}`,
+    type: Reward,
   });
   return request.response;
 }
@@ -47,6 +50,7 @@ export async function createReward(reward) {
     method: 'POST',
     path: `/api/rewards`,
     body: reward,
+    type: Reward,
   });
   return r.response;
 }

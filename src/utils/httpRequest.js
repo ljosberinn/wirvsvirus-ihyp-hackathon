@@ -1,7 +1,7 @@
 /**
  * Makes an HTTP request using XMLHttpRequest.
  * @param config
- * @returns {Promise<unknown>}
+ * @returns {Promise<T>}
  */
 export async function httpRequest(config) {
   const baseUrl = 'https://localhost:8080';

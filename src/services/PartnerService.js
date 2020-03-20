@@ -1,4 +1,5 @@
 import { httpRequest } from '../utils/httpRequest';
+import { Partner } from './entities/Partner';
 
 /**
  * Returns all existing partner.
@@ -8,6 +9,7 @@ export async function getAllPartner() {
   const request = await httpRequest({
     method: 'GET',
     path: '/api/partner',
+    type: Partner,
   });
   return request.response;
 }
@@ -21,6 +23,7 @@ export async function getPartner(id) {
   const request = await httpRequest({
     method: 'GET',
     path: `/api/partner/${id}`,
+    type: Partner,
   });
   return request.response;
 }
@@ -47,6 +50,7 @@ export async function createPartner(partner) {
     method: 'POST',
     path: `/api/partner`,
     body: partner,
+    type: Partner,
   });
   return request.response;
 }

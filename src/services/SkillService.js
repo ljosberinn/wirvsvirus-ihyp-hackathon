@@ -1,4 +1,5 @@
 import { httpRequest } from '../utils/httpRequest';
+import { Skill } from './entities/Skill';
 
 /**
  * Returns all existing skills.
@@ -8,6 +9,7 @@ export async function getAllSkills() {
   const request = await httpRequest({
     method: 'GET',
     path: '/api/skills',
+    type: Skill,
   });
   return request.response;
 }
@@ -21,6 +23,7 @@ export async function getSkill(id) {
   const request = await httpRequest({
     method: 'GET',
     path: `/api/skills/${id}`,
+    type: Skill,
   });
   return request.response;
 }
@@ -47,6 +50,7 @@ export async function createSkill(skill) {
     method: 'POST',
     path: `/api/skills`,
     body: skill,
+    type: Skill,
   });
   return request.response;
 }

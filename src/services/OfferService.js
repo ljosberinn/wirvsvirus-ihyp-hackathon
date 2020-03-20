@@ -1,4 +1,5 @@
 import { httpRequest } from '../utils/httpRequest';
+import { Offer } from './entities/Offer';
 
 /**
  * Returns all existing offers.
@@ -8,6 +9,7 @@ export async function getAllOffers() {
   const request = await httpRequest({
     method: 'GET',
     path: '/api/offers',
+    type: Offer,
   });
   return request.response;
 }
@@ -21,6 +23,7 @@ export async function getOffer(id) {
   const request = await httpRequest({
     method: 'GET',
     path: `/api/offers/${id}`,
+    type: Offer,
   });
   return request.response;
 }
@@ -47,6 +50,7 @@ export async function createOffer(offer) {
     method: 'POST',
     path: `/api/offers`,
     body: offer,
+    type: Offer,
   });
   return request.response;
 }

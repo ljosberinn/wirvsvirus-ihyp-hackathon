@@ -1,4 +1,5 @@
 import { httpRequest } from '../utils/httpRequest';
+import { Request } from './entities/Request';
 
 /**
  * Returns all existing requests.
@@ -8,6 +9,7 @@ export async function getAllRequests() {
   const request = await httpRequest({
     method: 'GET',
     path: '/api/requests',
+    type: Request,
   });
   return request.response;
 }
@@ -21,6 +23,7 @@ export async function getRequest(id) {
   const request = await httpRequest({
     method: 'GET',
     path: `/api/requests/${id}`,
+    type: Request,
   });
   return request.response;
 }
@@ -47,6 +50,7 @@ export async function createRequest(request) {
     method: 'POST',
     path: `/api/requests`,
     body: request,
+    type: Request,
   });
   return r.response;
 }

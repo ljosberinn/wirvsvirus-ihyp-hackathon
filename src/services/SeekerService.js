@@ -1,4 +1,5 @@
 import { httpRequest } from '../utils/httpRequest';
+import { Seeker } from './entities/Seeker';
 
 /**
  * Returns all existing seeker.
@@ -8,6 +9,7 @@ export async function getAllSeeker() {
   const request = await httpRequest({
     method: 'GET',
     path: '/api/seeker',
+    type: Seeker,
   });
   return request.response;
 }
@@ -21,6 +23,7 @@ export async function getSeeker(id) {
   const request = await httpRequest({
     method: 'GET',
     path: `/api/seeker/${id}`,
+    type: Seeker,
   });
   return request.response;
 }
@@ -47,6 +50,7 @@ export async function createSeeker(seeker) {
     method: 'POST',
     path: `/api/seeker`,
     body: seeker,
+    type: Seeker,
   });
   return request.response;
 }
