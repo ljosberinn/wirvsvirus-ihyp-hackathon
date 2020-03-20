@@ -1,0 +1,12 @@
+{
+  "title": "Login",
+  "signIn": "Login",
+  "or": "oder",
+  "orWithMail": "oder mit Mail",
+  "signUp": "Registrieren",
+  "dontHaveAnAccount": "Du hast noch keinen Account?",
+  "createAccount": "Account erstellen",
+  "forgotPassword": "Passwort vergessen?",
+  "email": "Email",
+  "password": "Passwort"
+}

@@ -10,7 +10,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'de',
     debug: false,
     load: 'languageOnly',
     resources: ENABLED_LANGUAGES.reduce((carry, slug) => {

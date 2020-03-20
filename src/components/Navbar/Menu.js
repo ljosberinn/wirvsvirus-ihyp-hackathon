@@ -5,7 +5,6 @@ import { useIdentityContext } from 'react-netlify-identity';
 import withSuspense from '../../hocs/withSuspense';
 import DiscordLink from '../DiscordLink';
 import GithubLink from '../GithubLink';
-import LanguageSwitch from '../LanguageSwitch';
 import ThemeSwitch from '../ThemeSwitch';
 
 const AuthenticatedNavButtons = lazy(() =>
@@ -32,7 +31,6 @@ export default withSuspense(function Menu() {
   return (
     <Navbar.Menu className="is-active">
       <Navbar.Segment align="end">
-        <LanguageSwitch from="nav" />
         <ThemeSwitch from="nav" />
         <DiscordLink from="nav" />
         <GithubLink from="nav" />

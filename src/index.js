@@ -6,13 +6,9 @@ import { IdentityContextProvider } from 'react-netlify-identity';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
-import { ServiceWorker, Layout } from './components';
+import { Layout } from './components';
 import { LOGROCKET_ID, SITE_URL, IS_LIVE } from './constants/env';
-import {
-  ThemeProvider,
-  ServiceWorkerProvider,
-  NavigationProvider,
-} from './context';
+import { ThemeProvider, NavigationProvider } from './context';
 
 import './i18n';
 import './utils/errors';
@@ -54,9 +50,6 @@ function identifyUser(user) {
 render(
   <StrictMode>
     <ThemeProvider>
-      <ServiceWorkerProvider>
-        <ServiceWorker />
-      </ServiceWorkerProvider>
       <Router>
         <IdentityContextProvider url={SITE_URL} onAuthChange={identifyUser}>
           <NavigationProvider>

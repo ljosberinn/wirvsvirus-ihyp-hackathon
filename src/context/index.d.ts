@@ -26,11 +26,3 @@ export function useTheme(): {
 };
 
 export function ThemeProvider({ children }): JSX.Element;
-
-export function useServiceWorker(): {
-  isSupported: boolean;
-  registration?: ServiceWorkerRegistration;
-  options?: RegistrationOptions;
-};
-
-export function ServiceWorkerProvider({ children }): JSX.Element;

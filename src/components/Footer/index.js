@@ -12,7 +12,6 @@ import DiscordLink from '../DiscordLink';
 import ExternalLink from '../ExternalLink';
 import GithubLink from '../GithubLink';
 import Icon from '../Icon';
-import LanguageSwitch from '../LanguageSwitch';
 import ThemeSwitch from '../ThemeSwitch';
 import styles from './Footer.module.scss';
 
@@ -104,9 +103,6 @@ export default memo(
                     </Generic>
                     <li>
                       <ThemeSwitch from="footer" />
-                    </li>
-                    <li>
-                      <LanguageSwitch from="footer" />
                     </li>
                     <DiscordLink from="footer" />
                     <GithubLink from="footer" />
