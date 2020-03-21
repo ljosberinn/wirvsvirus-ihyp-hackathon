@@ -44,7 +44,7 @@ export default function Map() {
         zoom: map.getZoom().toFixed(2),
       });
     });
-  }, [location.lat, location.lng, location.zoom]);
+  }, []);
 
   function addMarker(long, lat, map) {
     const el = document.createElement('div');
