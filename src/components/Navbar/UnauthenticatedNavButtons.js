@@ -15,21 +15,16 @@ export default withSuspense(function UnauthenticatedNavButtons() {
   const { t } = useTranslation('routes');
   const { theme } = useTheme();
   const {
-    routes: { REGISTER, LOGIN },
+    routes: { LOGIN },
     PreloadingLink,
   } = useNavigationContext();
 
-  if (!REGISTER || !LOGIN) {
+  if (!LOGIN) {
     return null;
   }
 
   return (
     <Button.Group>
-      <PreloadingLink as={NavButton} color="primary" to={REGISTER}>
-        <Icon svg={REGISTER.icon} />
-        <span>{t('register')}</span>
-      </PreloadingLink>
-
       <PreloadingLink
         as={NavButton}
         color={theme === 'dark' ? 'light' : undefined}
