@@ -17,3 +17,4 @@ export { default as ValidityIcon } from './ValidityIcon';
 export { default as ThemeSwitch } from './ThemeSwitch';
 export { default as Layout } from './Layout';
 export { default as Step } from './Step';
+export { default as Slider } from './Slider';
