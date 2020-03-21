@@ -1,20 +1,14 @@
 import PropTypes from 'prop-types';
 import { Menu } from 'rbx';
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import Icon from '../../Icon';
 
 /**
  *
- * @param {string} path
- */
-const matchPath = path =>
-  window.location.pathname.includes(path.substr(1).split('/')[0]);
-
-/**
- *
  * @param {{
+ * active: boolean;
  * to: string;
  * svg: import('react-icons').IconType;
  * children: JSX.Element;
@@ -22,18 +16,12 @@ const matchPath = path =>
  * onClick?: () => void;
  * }}
  */
-export default function NavigationLink({
-  to,
-  svg,
-  children,
-  isExpanded,
-  onClick,
-}) {
+function NavigationLink({ to, svg, children, isExpanded, onClick, active }) {
   return (
     <Menu.List.Item
       as={Link}
       to={to}
-      active={matchPath(to)}
+      active={active}
       tooltip={isExpanded ? undefined : children}
       tooltipPosition={isExpanded ? undefined : 'right'}
       onClick={onClick}
@@ -45,9 +33,12 @@ export default function NavigationLink({
 }
 
 NavigationLink.propTypes = {
+  active: PropTypes.bool.isRequired,
   to: PropTypes.string.isRequired,
   svg: PropTypes.func.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   children: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
+
+export default memo(NavigationLink);

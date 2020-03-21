@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Menu } from 'rbx';
 import React, { lazy } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 import { useNavigationContext } from '../../context';
 import { useMediaQuery } from '../../hooks';
@@ -16,6 +17,7 @@ export default function RouteList({ isExpanded }) {
   const { t } = useTranslation('routes');
   const { routes, PreloadingLink } = useNavigationContext();
   const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const { pathname } = useLocation();
 
   return (
     <Menu.List>
@@ -26,6 +28,7 @@ export default function RouteList({ isExpanded }) {
             as={NavigationLink}
             to={route}
             path={route.clientPath}
+            active={route.clientPath === pathname}
             svg={route.icon}
             isExpanded={isDesktop ? isExpanded : true}
             key={route.clientPath}
