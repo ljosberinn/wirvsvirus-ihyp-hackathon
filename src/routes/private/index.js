@@ -1,6 +1,19 @@
-import { FaCog, FaHome } from 'react-icons/fa';
+import { FaCog, FaHome, FaTasks } from 'react-icons/fa';
 
 import LoadableComponent, { withMaxDelay } from '../loadUtils';
+
+export const TASKS = {
+  routerPath: '/aufgaben',
+  clientPath: '/aufgaben',
+  title: 'routes:tasks',
+  icon: FaTasks,
+  visibleInDrawerNav: true,
+  component: LoadableComponent(() =>
+    withMaxDelay(
+      import(/* webpackChunkName: "private.tasks" */ './TasksRoute'),
+    ),
+  ),
+};
 
 export const LANDING_PAGE = {
   routerPath: '/',
