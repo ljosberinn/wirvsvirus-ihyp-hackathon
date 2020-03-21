@@ -1,8 +1,13 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import { Button } from 'rbx';
 import React from 'react';
 
-function Step({ active, title, completed, index, onClick }) {
+import styles from './Step.module.scss';
+
+function Step({ active, title, completed, index, onClick, isForm }) {
+  const TitleTag = isForm && active ? 'legend' : 'p';
+
   return (
     <div
       className={classnames(
@@ -14,7 +19,7 @@ function Step({ active, title, completed, index, onClick }) {
     >
       <div className="step-marker">{index}</div>
       <div className="step-details">
-        <p className="step-title">{title}</p>
+        <TitleTag className="step-title">{title}</TitleTag>
       </div>
     </div>
   );
@@ -26,6 +31,7 @@ Step.propTypes = {
   completed: PropTypes.bool,
   index: PropTypes.number.isRequired,
   onClick: PropTypes.func,
+  isForm: PropTypes.bool,
 };
 
 function StepsContainer({ children, steps, actions }) {
@@ -33,7 +39,11 @@ function StepsContainer({ children, steps, actions }) {
     <div className="steps">
       {steps}
       <div className="steps-content">{children}</div>
-      <div className="steps-actions">{actions}</div>
+      <Button.Group
+        className={classnames('steps-actions', styles.actionContainer)}
+      >
+        {actions}
+      </Button.Group>
     </div>
   );
 }

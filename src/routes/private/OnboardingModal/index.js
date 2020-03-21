@@ -1,38 +1,65 @@
 import PropTypes from 'prop-types';
-import { Modal, Box, Button } from 'rbx';
+import { Modal, Box } from 'rbx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaStepBackward, FaStepForward, FaCheck } from 'react-icons/fa';
 import { useIdentityContext } from 'react-netlify-identity';
 
-import { Form, Step, Icon } from '../../../components';
+import { Form, Step } from '../../../components';
 import { withSentry } from '../../../hocs';
 import styles from './OnboardingModal.module.scss';
+import {
+  StepActions,
+  ContactStep,
+  ImageStep,
+  ActivitiesStep,
+} from './components';
 
-const steps = [
-  { name: 'contact', i18nKey: 'contactData' },
+export const steps = [
+  { name: 'contact', i18nKey: 'contactData', component: ContactStep },
   {
     name: 'activities',
     i18nKey: 'activities',
+    component: ActivitiesStep,
   },
-  { name: 'photo', i18nKey: 'photo' },
+  { name: 'photo', i18nKey: 'photo', component: ImageStep },
 ];
 
 const initialState = {
-  [steps[0]]: {
+  [steps[0].name]: {
     title: null,
     firstName: null,
     lastName: null,
     phone: null,
   },
-  [steps[1]]: {
+  [steps[1].name]: {
     radius: 10, // km
     address: null,
     activities: [],
   },
-  [steps[2]]: {
+  [steps[2].name]: {
     img: null,
   },
+};
+
+const validateCurrentStep = (data, currentStep) => {
+  switch (currentStep) {
+    case 0:
+      const { title, firstName, lastName, phone } = Object.values(data)[
+        currentStep
+      ];
+
+      return !!title && !!firstName && !!lastName && !!phone;
+    case 1:
+      const { radius, address, activities } = Object.values(data)[currentStep];
+
+      return radius >= 1 && radius <= 20 && !!address && activities.length > 0;
+
+    case 2:
+      const { img } = Object.values(data)[currentStep];
+      return !!img;
+    default:
+      return false;
+  }
 };
 
 export default withSentry(function OnboardingModal() {
@@ -43,7 +70,7 @@ export default withSentry(function OnboardingModal() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({ ...initialState, id });
-  const [currentStep, setCurrentStep] = useState(steps[2].name);
+  const [currentStep, setCurrentStep] = useState(0);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -56,14 +83,12 @@ export default withSentry(function OnboardingModal() {
   }
 
   function handleChange({ target: { value, name } }) {
+    const dataKey = steps[currentStep].name;
+
     setData({
       ...data,
-      [currentStep]: { ...data[currentStep], [name]: value },
+      [dataKey]: { ...data[dataKey], [name]: value },
     });
-  }
-
-  function findIndexOfCurrentStep() {
-    return steps.findIndex(({ name }) => currentStep === name);
   }
 
   function handleStepChange(newIndex) {
@@ -71,14 +96,10 @@ export default withSentry(function OnboardingModal() {
       return;
     }
 
-    const currentIndex = findIndexOfCurrentStep();
-
-    if (newIndex < currentIndex) {
-      setCurrentStep(steps[newIndex].name);
-    }
+    setCurrentStep(newIndex);
   }
 
-  const indexOfCurrentStep = findIndexOfCurrentStep();
+  const StepComponent = steps[currentStep].component;
 
   return (
     <Modal active>
@@ -89,36 +110,38 @@ export default withSentry(function OnboardingModal() {
           <Form onSubmit={handleSubmit}>
             <fieldset disabled={isLoading}>
               <Step.Container
-                steps={steps.map(({ i18nKey, name }, index) => (
+                isForm
+                steps={steps.map(({ i18nKey }, index) => (
                   <Step
+                    isForm
                     title={t(i18nKey)}
                     index={index + 1}
-                    completed={indexOfCurrentStep > index}
-                    active={name === currentStep}
+                    completed={currentStep > index}
+                    active={index === currentStep}
                     onClick={
-                      index > indexOfCurrentStep
+                      index > currentStep
                         ? undefined
                         : () => handleStepChange(index)
                     }
-                    key={name}
+                    key={steps[index].name}
                   />
                 ))}
                 actions={
                   <StepActions
                     currentStep={currentStep}
                     handleStepChange={handleStepChange}
-                    indexOfCurrentStep={indexOfCurrentStep}
+                    mayCurrentlyContinue={validateCurrentStep(
+                      data,
+                      currentStep,
+                    )}
                     isLoading={isLoading}
                   />
                 }
               >
-                {currentStep === steps[2].name ? (
-                  <ImageStep />
-                ) : currentStep === steps[1].name ? (
-                  <ActivitiesStep />
-                ) : (
-                  <ContactStep />
-                )}
+                <StepComponent
+                  handleChange={handleChange}
+                  {...data[steps[currentStep].name]}
+                />
               </Step.Container>
             </fieldset>
           </Form>
@@ -127,74 +150,3 @@ export default withSentry(function OnboardingModal() {
     </Modal>
   );
 });
-
-function StepActions({
-  currentStep,
-  handleStepChange,
-  indexOfCurrentStep,
-  isLoading,
-}) {
-  const { t } = useTranslation('onboarding');
-
-  function handleGoBack() {
-    if (currentStep === steps[0].name) {
-      return;
-    }
-
-    handleStepChange(indexOfCurrentStep - 1);
-  }
-
-  return (
-    <Button.Group>
-      <Button
-        onClick={handleGoBack}
-        type="button"
-        disabled={currentStep === steps[0].name}
-      >
-        <Icon svg={FaStepBackward} />
-        <span>{t('back')}</span>
-      </Button>
-      {currentStep === steps[steps.length - 1].name ? (
-        <Button
-          color="primary"
-          type="submit"
-          state={isLoading ? 'loading' : undefined}
-        >
-          <Icon svg={FaCheck} />
-          <span>{t('completeRegistration')}</span>
-        </Button>
-      ) : (
-        <Button
-          type="button"
-          color="info"
-          disabled={currentStep === steps.length - 1}
-        >
-          <span>{t('continue')}</span>
-          <Icon svg={FaStepForward} />
-        </Button>
-      )}
-    </Button.Group>
-  );
-}
-
-StepActions.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-};
-
-function ContactStep() {
-  const { t } = useTranslation('onboarding');
-
-  return <p>{t('contactData')}</p>;
-}
-
-function ActivitiesStep() {
-  const { t } = useTranslation('onboarding');
-
-  return <p>HelpStep</p>;
-}
-
-function ImageStep() {
-  const { t } = useTranslation('onboarding');
-
-  return <p>ImageStep</p>;
-}

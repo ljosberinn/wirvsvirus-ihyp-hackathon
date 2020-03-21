@@ -1,6 +1,6 @@
 {
   "contactData": "Kontaktdaten",
-  "salutation": "Anrede",
+  "title": "Anrede",
   "firstName": "Vorname",
   "lastName": "Nachname",
   "phone": "Telefonnummer",
