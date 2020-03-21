@@ -57,7 +57,6 @@ const validateCurrentStep = (data, currentStep) => {
     case 2:
       const { img, imgSecurity } = Object.values(data)[currentStep];
 
-      console.log(!!img && imgSecurity, { img, imgSecurity });
       return !!img && imgSecurity;
     default:
       return false;
