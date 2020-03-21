@@ -30,7 +30,8 @@
     "react-scripts": "3.4.1",
     "react-toastify": "^5.5.0",
     "use-google-maps-sdk": "^0.0.6",
-    "react-use": "^13.27.0"
+    "react-use": "^13.27.0",
+    "mapbox-gl": "^1.8.1"
   },
   "devDependencies": {
     "@sheerun/mutationobserver-shim": "^0.3.3",
