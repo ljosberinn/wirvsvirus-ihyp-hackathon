@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIdentityContext } from 'react-netlify-identity';
 
-import { Form, Step } from '../../../components';
+import { Form, Step, Loader } from '../../../components';
 import { withSentry } from '../../../hocs';
 import { createGuardian, getGuardian } from '../../../services/GuardianService';
 import styles from './OnboardingModal.module.scss';
@@ -68,6 +68,7 @@ export default withSentry(function OnboardingModal() {
   const { user, setUser } = useIdentityContext();
   const { t } = useTranslation('onboarding');
 
+  const [isLoadingGuardian, setGuardianLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(initialState);
   const [currentStep, setCurrentStep] = useState(0);
@@ -79,9 +80,14 @@ export default withSentry(function OnboardingModal() {
       })
       .catch(error => {
         console.error(error);
-      });
+      })
+      .finally(() => setGuardianLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.id]);
+
+  if (isLoadingGuardian) {
+    return <Loader isFullPage defer />;
+  }
 
   if (user.guardian) {
     return null;
