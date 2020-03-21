@@ -1,10 +1,12 @@
+import { BACKEND_KEY } from '../constants/env';
+
 /**
  * Makes an HTTP request using XMLHttpRequest.
  * @param config
  * @returns {Promise<any>}
  */
 export async function httpRequest(config) {
-  const baseUrl = 'https://localhost:8080';
+  const baseUrl = 'https://api.help-at-home.org';
   return new Promise((resolve, reject) => {
     const http = new XMLHttpRequest();
     http.onreadystatechange = () => {
@@ -28,10 +30,7 @@ export async function httpRequest(config) {
       }
     };
     http.open(config.method, baseUrl + config.path);
-    const token = getCookie('auth');
-    if (token) {
-      http.setRequestHeader('x-api-key', token);
-    }
+    http.setRequestHeader('x-api-key', BACKEND_KEY);
     http.responseType = 'json';
     http.send(config.body ? JSON.stringify(config.body) : undefined);
   });
@@ -62,19 +61,4 @@ function transformDTO(dto, type) {
     instance[key] = dto[key];
   }
   return instance;
-}
-
-/**
- * Returns a cookie by name
- * @param name
- * @returns {string}
- */
-function getCookie(name) {
-  const value = '; ' + document.cookie;
-  const parts = value.split('; ' + name + '=');
-  if (parts.length === 2)
-    return parts
-      .pop()
-      .split(';')
-      .shift();
 }

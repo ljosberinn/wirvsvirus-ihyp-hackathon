@@ -44,6 +44,7 @@ export default function Map() {
         zoom: map.getZoom().toFixed(2),
       });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function addMarker(long, lat, map) {

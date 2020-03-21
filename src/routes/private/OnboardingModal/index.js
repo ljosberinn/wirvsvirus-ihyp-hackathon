@@ -1,10 +1,11 @@
 import { Modal, Box } from 'rbx';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIdentityContext } from 'react-netlify-identity';
 
 import { Form, Step } from '../../../components';
 import { withSentry } from '../../../hocs';
+import { createGuardian, getGuardian } from '../../../services/GuardianService';
 import styles from './OnboardingModal.module.scss';
 import {
   StepActions,
@@ -64,16 +65,29 @@ const validateCurrentStep = (data, currentStep) => {
 };
 
 export default withSentry(function OnboardingModal() {
-  const {
-    user: { id },
-  } = useIdentityContext();
+  const { user, setUser } = useIdentityContext();
   const { t } = useTranslation('onboarding');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState({ ...initialState, id });
+  const [data, setData] = useState(initialState);
   const [currentStep, setCurrentStep] = useState(0);
 
-  function handleSubmit(event) {
+  useEffect(() => {
+    getGuardian(user.id)
+      .then(guardian => {
+        setUser({ ...user, guardian });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.id]);
+
+  if (user.guardian) {
+    return null;
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
 
     if (currentStep !== steps.length - 1) {
@@ -85,9 +99,18 @@ export default withSentry(function OnboardingModal() {
 
     setIsLoading(true);
 
-    setTimeout(() => {
+    const payload = Object.values(data).reduce(
+      (carry, dataset) => ({ ...carry, ...dataset }),
+      { id: user.id },
+    );
+
+    try {
+      await createGuardian(payload);
+    } catch (error) {
+      console.error(error);
+    } finally {
       setIsLoading(false);
-    }, 2000);
+    }
   }
 
   function handleChange({ target: { value, name, type, checked, files } }) {
