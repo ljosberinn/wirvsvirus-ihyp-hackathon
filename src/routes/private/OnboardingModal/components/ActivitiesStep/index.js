@@ -7,10 +7,9 @@ import { useGeolocation } from 'react-use';
 import { usePlacePredictions } from 'use-google-maps-sdk';
 
 import { Slider, Checkbox, Icon } from '../../../../../components';
+import { GOOGLE_MAPS_KEY } from '../../../../../constants/env';
 
 const possibleActivities = ['SHOP', 'DOG', 'HOMEWORK', 'SHARE'];
-
-const gmapsKey = process.env.REACT_APP_GOOGLE_MAPS_KEY;
 
 export default function ActivitiesStep({
   handleChange,
@@ -23,7 +22,7 @@ export default function ActivitiesStep({
   const geolocation = useGeolocation();
 
   const { results } = usePlacePredictions({
-    key: gmapsKey,
+    key: GOOGLE_MAPS_KEY,
     country: ['DE', 'AT', 'CH'],
     radius: radius * 1000,
     geolocation,

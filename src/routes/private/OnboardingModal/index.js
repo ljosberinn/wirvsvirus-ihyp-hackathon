@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Modal, Box } from 'rbx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -38,6 +37,7 @@ const initialState = {
   },
   [steps[2].name]: {
     img: undefined,
+    imgSecurity: false,
   },
 };
 
@@ -55,8 +55,10 @@ const validateCurrentStep = (data, currentStep) => {
       return radius >= 1 && radius <= 20 && !!address && activities.length > 0;
 
     case 2:
-      const { img } = Object.values(data)[currentStep];
-      return !!img;
+      const { img, imgSecurity } = Object.values(data)[currentStep];
+
+      console.log(!!img && imgSecurity, { img, imgSecurity });
+      return !!img && imgSecurity;
     default:
       return false;
   }
@@ -70,10 +72,17 @@ export default withSentry(function OnboardingModal() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({ ...initialState, id });
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (currentStep !== steps.length - 1) {
+      if (validateCurrentStep(data, currentStep)) {
+        handleStepChange(currentStep + 1);
+      }
+      return;
+    }
 
     setIsLoading(true);
 
@@ -82,27 +91,74 @@ export default withSentry(function OnboardingModal() {
     }, 2000);
   }
 
-  function handleChange({ target: { value, name, type, checked } }) {
-    const dataKey = steps[currentStep].name;
+  function handleChange({ target: { value, name, type, checked, files } }) {
+    const key = steps[currentStep].name;
 
-    if (type !== 'checkbox') {
-      setData({
-        ...data,
-        [dataKey]: { ...data[dataKey], [name]: value },
-      });
+    if (type === 'checkbox') {
+      const currentlySelectedValues = data[key][name];
+
+      // checkbox with multiple names
+      if (Array.isArray(currentlySelectedValues)) {
+        setData({
+          ...data,
+          [key]: {
+            ...data[key],
+            [name]: checked
+              ? [...currentlySelectedValues, value]
+              : currentlySelectedValues.filter(val => val !== value),
+          },
+        });
+      } else {
+        // checkbox with boolean flip
+        setData({
+          ...data,
+          [key]: {
+            ...data[key],
+            [name]: !data[key][name],
+          },
+        });
+      }
+
       return;
     }
 
-    const currentlySelectedValues = data[dataKey][name];
+    if (type === 'file') {
+      // reset
+      if (files.length === 0 && data[key][name].length > 0) {
+        setData({
+          ...data,
+          [key]: { ...data[key], [name]: undefined },
+        });
 
+        return;
+      }
+
+      const [file] = files;
+
+      const reader = new FileReader();
+
+      if (file) {
+        reader.addEventListener(
+          'load',
+          function() {
+            setData({
+              ...data,
+              [key]: { ...data[key], [name]: reader.result },
+            });
+          },
+          false,
+        );
+
+        reader.readAsDataURL(file);
+      }
+
+      return;
+    }
+
+    // plain old input[type="text"]
     setData({
       ...data,
-      [dataKey]: {
-        ...data[dataKey],
-        [name]: checked
-          ? [...currentlySelectedValues, value]
-          : currentlySelectedValues.filter(val => val !== value),
-      },
+      [key]: { ...data[key], [name]: value },
     });
   }
 

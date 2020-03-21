@@ -1,14 +1,13 @@
 {
   "contactData": "Kontaktdaten",
-  "contact-title": "Um Deine Registrierung abzuschließen benötigen wir noch einige Rahmeninformationen zu deiner Person:",
+  "contact-title": "Um Deine Registrierung abzuschließen benötigen wir noch einige Rahmeninformationen zu Deiner Person:",
   "title": "Anrede",
   "firstName": "Vorname",
   "lastName": "Nachname",
   "phone": "Telefonnummer",
 
-  "activities-title": "In welchem Umkreis kannst du helfen?",
+  "activities-title": "In welchem Umkreis kannst Du helfen?",
   "activities": "Tätigkeiten",
-  "helpRadius": "Du kannst helfen im Umkreis von:",
   "address-label": "im Umkreis von",
   "address": "Stadt / PLZ",
   "activityLabel": "Bei folgenden Tätigkeiten:",
@@ -17,10 +16,14 @@
   "activity-homework": "Kleine Hausarbeiten",
   "activity-share": "Dinge teilen",
 
-  "photo-title": "placeholder",
+  "photo-title": "Fast geschafft! Damit Hilfesuchende auch wissen wen sie erwarten benötigen wir noch ein Foto von dir.",
   "photo": "Foto",
   "request-photo": "Lade bitte noch ein Foto von Dir hoch, damit unsere Hilfesuchenden Dich erkennen",
-  "upload": "Jetzt hochladen",
+  "upload-security-label": "Ich versichere, dass das Bild folgenden Kriterien entspricht.",
+  "upload-help-1": "das Bild zeigt meine Person",
+  "upload-help-2": "das Bild wurde in akzeptablem Licht aufgenommen",
+  "upload-help-3": "das Bild ist jugendfrei",
+  "upload-cta": "Foto auswählen",
 
   "back": "Zurück",
   "continue": "Weiter",

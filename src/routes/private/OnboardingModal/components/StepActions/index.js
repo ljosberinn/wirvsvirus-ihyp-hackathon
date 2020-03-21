@@ -44,6 +44,7 @@ export default function StepActions({
           color="primary"
           type="submit"
           state={isLoading ? 'loading' : undefined}
+          disabled={!mayCurrentlyContinue}
         >
           <Icon svg={FaCheck} />
           <span>{t('completeRegistration')}</span>

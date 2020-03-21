@@ -10,4 +10,6 @@ export const ENABLED_PROVIDER = process.env.REACT_APP_ENABLED_PROVIDER.split(
 export const SENTRY_DSN = process.env.REACT_APP_SENTRY_DSN;
 export const DISCORD_LINK = process.env.REACT_APP_DISCORD_LINK;
 export const LOGROCKET_ID = process.env.REACT_APP_LOGROCKET_ID;
+export const GOOGLE_MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
+export const BACKEND_KEY = process.env.REACT_APP_BACKEND_KEY;
 export const IS_LIVE = process.env.NODE_ENV !== 'development';
