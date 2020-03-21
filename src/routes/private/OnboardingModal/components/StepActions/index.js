@@ -52,6 +52,7 @@ export default function StepActions({
         <Button
           type="button"
           color="info"
+          key="next-button"
           disabled={!mayCurrentlyContinue || currentStep === steps.length - 1}
           onClick={mayCurrentlyContinue ? handleContinue : undefined}
         >
