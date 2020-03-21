@@ -1,25 +1,29 @@
 {
   "contactData": "Kontaktdaten",
+  "contact-title": "Um Deine Registrierung abzuschließen benötigen wir noch einige Rahmeninformationen zu deiner Person:",
   "title": "Anrede",
   "firstName": "Vorname",
   "lastName": "Nachname",
   "phone": "Telefonnummer",
 
+  "activities-title": "In welchem Umkreis kannst du helfen?",
   "activities": "Tätigkeiten",
   "helpRadius": "Du kannst helfen im Umkreis von:",
+  "address-label": "im Umkreis von",
   "address": "Stadt / PLZ",
   "activityLabel": "Bei folgenden Tätigkeiten:",
-  "activity-groceries": "Einkaufen",
-  "activity-pets": "Hund Gassi führen",
-  "activity-home": "Kleine Hausarbeiten",
-  "activity-sharing": "Dinge teilen",
+  "activity-shop": "Einkaufen",
+  "activity-dog": "Hund Gassi führen",
+  "activity-homework": "Kleine Hausarbeiten",
+  "activity-share": "Dinge teilen",
 
-  "back": "Zurück",
-  "continue": "Weiter",
-
+  "photo-title": "placeholder",
   "photo": "Foto",
   "request-photo": "Lade bitte noch ein Foto von Dir hoch, damit unsere Hilfesuchenden Dich erkennen",
   "upload": "Jetzt hochladen",
+
+  "back": "Zurück",
+  "continue": "Weiter",
 
   "completeRegistration": "Registrierung abschließen"
 }

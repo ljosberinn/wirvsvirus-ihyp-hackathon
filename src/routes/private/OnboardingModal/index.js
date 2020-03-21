@@ -26,18 +26,18 @@ export const steps = [
 
 const initialState = {
   [steps[0].name]: {
-    title: null,
-    firstName: null,
-    lastName: null,
-    phone: null,
+    title: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    phone: undefined,
   },
   [steps[1].name]: {
     radius: 10, // km
-    address: null,
+    address: undefined,
     activities: [],
   },
   [steps[2].name]: {
-    img: null,
+    img: undefined,
   },
 };
 
@@ -70,7 +70,7 @@ export default withSentry(function OnboardingModal() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({ ...initialState, id });
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -82,12 +82,27 @@ export default withSentry(function OnboardingModal() {
     }, 2000);
   }
 
-  function handleChange({ target: { value, name } }) {
+  function handleChange({ target: { value, name, type, checked } }) {
     const dataKey = steps[currentStep].name;
+
+    if (type !== 'checkbox') {
+      setData({
+        ...data,
+        [dataKey]: { ...data[dataKey], [name]: value },
+      });
+      return;
+    }
+
+    const currentlySelectedValues = data[dataKey][name];
 
     setData({
       ...data,
-      [dataKey]: { ...data[dataKey], [name]: value },
+      [dataKey]: {
+        ...data[dataKey],
+        [name]: checked
+          ? [...currentlySelectedValues, value]
+          : currentlySelectedValues.filter(val => val !== value),
+      },
     });
   }
 

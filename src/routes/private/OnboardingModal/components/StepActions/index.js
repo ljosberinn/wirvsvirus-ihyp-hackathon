@@ -24,6 +24,10 @@ export default function StepActions({
   }
 
   function handleContinue() {
+    if (currentStep === steps.length - 1) {
+      return;
+    }
+
     handleStepChange(currentStep + 1);
   }
 

@@ -16,10 +16,7 @@ export default function ContactStep({
 
   return (
     <>
-      <Title size={5}>
-        Um Deine Registrierung abzuschließen benötigen wir noch einige
-        Rahmeninformationen zu deiner Person:
-      </Title>
+      <Title size={5}>{t('contact-title')}</Title>
 
       <Field>
         <Label htmlFor="title">{t('title')}</Label>
@@ -95,4 +92,8 @@ export default function ContactStep({
 
 ContactStep.propTypes = {
   handleChange: PropTypes.func.isRequired,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  title: PropTypes.string,
+  phone: PropTypes.string,
 };
