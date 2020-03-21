@@ -55,7 +55,7 @@ function transformResponse(response, type) {
  * @param type The object type
  */
 function transformDTO(dto, type) {
-  const keys = Object.prototype.hasOwnProperty.apply(dto);
+  const keys = Object.keys(dto);
   const instance = new type();
   for (const key of keys) {
     instance[key] = dto[key];
