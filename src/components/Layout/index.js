@@ -22,10 +22,10 @@ export default memo(function Layout({ children }) {
         className={styles.main}
         data-testid="layout-main"
       >
-        <DrawerNav data-testid="drawer-nav" />
         <Column className={styles.shadow} data-testid="layout-main-children">
           {children}
         </Column>
+        <DrawerNav data-testid="drawer-nav" />
       </Column.Group>
       <Footer data-testid="footer" />
     </>
