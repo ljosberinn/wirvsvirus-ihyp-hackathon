@@ -15,9 +15,14 @@
       flex-direction: column;
       justify-content: space-between;
 
-      li a span:not(:first-of-type) {
-        margin-left: 1rem;
-        line-height: 1.5;
+      li a {
+        display: flex;
+        justify-content: space-between;
+
+        span:not(:first-of-type) {
+          margin-left: 1rem;
+          line-height: 1.5;
+        }
       }
     }
   }

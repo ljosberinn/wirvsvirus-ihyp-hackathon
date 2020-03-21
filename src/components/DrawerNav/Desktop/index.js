@@ -17,10 +17,10 @@ export default function Desktop({ isExpanded, toggleMenu, ...rest }) {
       className={styles.transitionAll}
       {...rest}
     >
-      <Box as={Menu} textAlign="centered" className={styles.box}>
+      <Box as={Menu} textAlign="right" className={styles.box}>
         <nav aria-label="primary navigation">
           <RouteList isExpanded={isExpanded} />
-          <Menu.List className={styles.fixedBottom}>
+          <Menu.List>
             <Menu.List.Item
               onClick={toggleMenu}
               tooltip={isExpanded ? undefined : t('toggleMenu')}
