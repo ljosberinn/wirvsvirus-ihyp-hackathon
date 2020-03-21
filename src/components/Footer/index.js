@@ -31,7 +31,7 @@ export default memo(
     const { isLoggedIn, isConfirmedUser } = useIdentityContext();
     const { t } = useTranslation(['footer', 'routes', 'navigation']);
     const {
-      routes: { LANDING_PAGE, TOS, PRIVACY_POLICY },
+      routes: { LANDING_PAGE, TOS, PRIVACY_POLICY, IMPRINT, FAQ },
       PreloadingLink,
     } = useNavigationContext();
 
@@ -53,12 +53,12 @@ export default memo(
                 </div>
               </PreloadingLink>
               <p className={styles.paragraph}>
-                The personal React boilerplate of{' '}
-                <ExternalLink href="//github.com/ljosberinn">
-                  Gerrit Alex / ljosberinn
+                Entstanden im Rahmen des{' '}
+                <ExternalLink href="//wirvsvirushackathon.org/">
+                  #wirvsvirus-Hackathons
                 </ExternalLink>
+                .
               </p>
-              <p className={styles.paragraph}>MIT Gerrit Alex</p>
             </Column>
             <Column size={7} widescreen={{ size: 6, offset: 2 }}>
               <Column.Group>
@@ -93,6 +93,12 @@ export default memo(
                         <span>{t(PRIVACY_POLICY.title)}</span>
                       </PreloadingLink>
                     </li>
+                    <li>
+                      <PreloadingLink as={NavLink} to={IMPRINT}>
+                        <Icon svg={IMPRINT.icon} />
+                        <span>{t(IMPRINT.title)}</span>
+                      </PreloadingLink>
+                    </li>
                   </ul>
                 </Column>
 
@@ -101,6 +107,12 @@ export default memo(
                     <Generic as="li" textWeight="semibold">
                       {t('other')}
                     </Generic>
+                    <li>
+                      <PreloadingLink as={NavLink} to={FAQ}>
+                        <Icon svg={FAQ.icon} />
+                        <span>{t(FAQ.title)}</span>
+                      </PreloadingLink>
+                    </li>
                     <li>
                       <ThemeSwitch from="footer" />
                     </li>

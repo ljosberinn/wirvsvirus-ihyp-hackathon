@@ -1,10 +1,16 @@
-import { FaBookReader, FaShieldAlt } from 'react-icons/fa';
+import {
+  FaBookReader,
+  FaShieldAlt,
+  FaHandshake,
+  FaQuestionCircle,
+  FaStamp,
+} from 'react-icons/fa';
 
 import LoadableComponent, { withMaxDelay } from '../loadUtils';
 
 export const TOS = {
-  routerPath: '/tos',
-  clientPath: '/tos',
+  routerPath: '/nutzungsbedingungen',
+  clientPath: '/nutzungsbedingungen',
   title: 'routes:tos',
   icon: FaBookReader,
   visibleInDrawerNav: false,
@@ -14,8 +20,8 @@ export const TOS = {
 };
 
 export const PRIVACY_POLICY = {
-  routerPath: '/privacy-policy',
-  clientPath: '/privacy-policy',
+  routerPath: '/datenschutz',
+  clientPath: '/datenschutz',
   title: 'routes:privacyPolicy',
   icon: FaShieldAlt,
   visibleInDrawerNav: false,
@@ -24,6 +30,43 @@ export const PRIVACY_POLICY = {
       import(
         /* webpackChunkName: "shared.privacypolicy" */ './PrivacyPolicyRoute'
       ),
+    ),
+  ),
+};
+
+export const PARTNER = {
+  routerPath: '/partnerprogramm',
+  clientPath: '/partnerprogramm',
+  title: 'routes:partner',
+  icon: FaHandshake,
+  visibleInDrawerNav: true,
+  component: LoadableComponent(() =>
+    withMaxDelay(
+      import(/* webpackChunkName: "shared.partner" */ './PartnerRoute'),
+    ),
+  ),
+};
+
+export const FAQ = {
+  routerPath: '/häufige-fragen',
+  clientPath: '/häufige-fragen',
+  title: 'routes:faq',
+  icon: FaQuestionCircle,
+  visibleInDrawerNav: true,
+  component: LoadableComponent(() =>
+    withMaxDelay(import(/* webpackChunkName: "shared.faq" */ './FaqRoute')),
+  ),
+};
+
+export const IMPRINT = {
+  routerPath: '/impressum',
+  clientPath: '/impressum',
+  title: 'routes:imprint',
+  icon: FaStamp,
+  visibleInDrawerNav: true,
+  component: LoadableComponent(() =>
+    withMaxDelay(
+      import(/* webpackChunkName: "shared.imprint" */ './ImprintRoute'),
     ),
   ),
 };

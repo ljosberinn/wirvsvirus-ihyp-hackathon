@@ -5,5 +5,8 @@
   "resetPassword": "Passwort vergessen?",
   "privacyPolicy": "Datenschutz",
   "settings": "Einstellungen",
-  "login": "Login"
+  "login": "Login",
+  "partner": "Partnerprogramm",
+  "faq": "Häufige Fragen",
+  "imprint": "Impressum"
 }
