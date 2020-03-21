@@ -76,7 +76,9 @@ export default withSentry(function OnboardingModal() {
   useEffect(() => {
     getGuardian(user.id)
       .then(guardian => {
-        setUser({ ...user, guardian });
+        user.user_metadata = { ...user.user_metadata, guardian };
+
+        setUser(user);
       })
       .catch(error => {
         console.error(error);
@@ -89,7 +91,7 @@ export default withSentry(function OnboardingModal() {
     return <Loader isFullPage defer />;
   }
 
-  if (user.guardian) {
+  if (user.user_metadata.guardian) {
     return null;
   }
 

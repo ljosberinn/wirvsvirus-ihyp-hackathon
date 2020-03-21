@@ -6,3 +6,4 @@ export { default as usePrevious } from './usePrevious';
 export { default as useLocationBasedVisibility } from './useLocationBasedVisibility';
 export { default as useBreakpointBasedVisibility } from './useBreakpointBasedVisibility';
 export { default as useTimeout } from './useTimeout';
+export { default as useGuardian } from './useGuardian';

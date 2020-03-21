@@ -1,5 +1,7 @@
 import { LocationDescriptorObject } from 'history';
 
+import { Guardian } from '../services/entities/Guardian';
+
 export function useBreakpointVisibility(): [boolean, () => void];
 
 export function useLocationBasedVisibility(): [boolean, () => void];
@@ -18,3 +20,4 @@ export function usePrevious(initialValue: any): any;
 export function useScrollToTop(behaviour: ScrollBehavior): void;
 
 export function useTimeout(timeout: number): boolean;
+export function useGuardian(): Guardian;

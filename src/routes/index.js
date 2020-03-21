@@ -26,14 +26,24 @@ export default memo(function Routes() {
   );
 
   return (
-    <Switch>
-      {modals.map(({ routerPath, component }) => (
-        <Route path={routerPath} component={component} key={routerPath} />
-      ))}
-      {regularRoutes.map(({ routerPath, component }) => (
-        <Route path={routerPath} component={component} exact key={routerPath} />
-      ))}
-      <Route component={RedirectToHome} />
-    </Switch>
+    <>
+      <Switch>
+        {modals.map(({ routerPath, component }) => (
+          <Route path={routerPath} component={component} key={routerPath} />
+        ))}
+      </Switch>
+
+      <Switch>
+        {regularRoutes.map(({ routerPath, component }) => (
+          <Route
+            path={routerPath}
+            component={component}
+            exact
+            key={routerPath}
+          />
+        ))}
+        <Route component={RedirectToHome} />
+      </Switch>
+    </>
   );
 });
