@@ -195,7 +195,7 @@ export default withSentry(function OnboardingModal() {
   const StepComponent = steps[currentStep].component;
 
   return (
-    <Modal active>
+    <Modal active clipped>
       <Modal.Background />
 
       <Modal.Content>
