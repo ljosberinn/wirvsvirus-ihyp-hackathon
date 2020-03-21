@@ -8,7 +8,7 @@ import { Partner } from './entities/Partner';
 export async function getAllPartner() {
   const request = await httpRequest({
     method: 'GET',
-    path: '/api/partner',
+    path: '/partner',
     type: Partner,
   });
   return request.response;
@@ -22,7 +22,7 @@ export async function getAllPartner() {
 export async function getPartner(id) {
   const request = await httpRequest({
     method: 'GET',
-    path: `/api/partner/${id}`,
+    path: `/partner/${id}`,
     type: Partner,
   });
   return request.response;
@@ -36,7 +36,7 @@ export async function getPartner(id) {
 export async function deletePartner(id) {
   await httpRequest({
     method: 'DELETE',
-    path: `/api/partner/${id}`,
+    path: `/partner/${id}`,
   });
 }
 
@@ -48,7 +48,7 @@ export async function deletePartner(id) {
 export async function createPartner(partner) {
   const request = await httpRequest({
     method: 'POST',
-    path: `/api/partner`,
+    path: `/partner`,
     body: partner,
     type: Partner,
   });
@@ -64,7 +64,7 @@ export async function createPartner(partner) {
 export async function updatePartner(id, partner) {
   await httpRequest({
     method: 'POST',
-    path: `/api/partner/{id}`,
+    path: `/partner/{id}`,
     body: partner,
   });
 }

@@ -8,7 +8,7 @@ import { Skill } from './entities/Skill';
 export async function getAllSkills() {
   const request = await httpRequest({
     method: 'GET',
-    path: '/api/skills',
+    path: '/skills',
     type: Skill,
   });
   return request.response;
@@ -22,7 +22,7 @@ export async function getAllSkills() {
 export async function getSkill(id) {
   const request = await httpRequest({
     method: 'GET',
-    path: `/api/skills/${id}`,
+    path: `/skills/${id}`,
     type: Skill,
   });
   return request.response;
@@ -36,7 +36,7 @@ export async function getSkill(id) {
 export async function deleteSkill(id) {
   await httpRequest({
     method: 'DELETE',
-    path: `/api/skills/${id}`,
+    path: `/skills/${id}`,
   });
 }
 
@@ -48,7 +48,7 @@ export async function deleteSkill(id) {
 export async function createSkill(skill) {
   const request = await httpRequest({
     method: 'POST',
-    path: `/api/skills`,
+    path: `/skills`,
     body: skill,
     type: Skill,
   });
@@ -64,7 +64,7 @@ export async function createSkill(skill) {
 export async function updateSkill(id, skill) {
   await httpRequest({
     method: 'POST',
-    path: `/api/skills/{id}`,
+    path: `/skills/{id}`,
     body: skill,
   });
 }

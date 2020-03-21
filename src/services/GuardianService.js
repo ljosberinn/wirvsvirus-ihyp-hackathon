@@ -8,7 +8,7 @@ import { Guardian } from './entities/Guardian';
 export async function getAllGuardians() {
   const request = await httpRequest({
     method: 'GET',
-    path: '/api/guardians',
+    path: '/guardians',
     type: Guardian,
   });
   return request.response;
@@ -22,7 +22,7 @@ export async function getAllGuardians() {
 export async function getGuardian(id) {
   const request = await httpRequest({
     method: 'GET',
-    path: `/api/guardians/${id}`,
+    path: `/guardians/${id}`,
     type: Guardian,
   });
   return request.response;
@@ -36,7 +36,7 @@ export async function getGuardian(id) {
 export async function deleteGuardian(id) {
   await httpRequest({
     method: 'DELETE',
-    path: `/api/guardians/${id}`,
+    path: `/guardians/${id}`,
   });
 }
 
@@ -48,7 +48,7 @@ export async function deleteGuardian(id) {
 export async function createGuardian(guardian) {
   const request = await httpRequest({
     method: 'POST',
-    path: `/api/guardians`,
+    path: `/guardians`,
     body: guardian,
     type: Guardian,
   });
@@ -64,7 +64,7 @@ export async function createGuardian(guardian) {
 export async function updateGuardian(id, guardian) {
   await httpRequest({
     method: 'POST',
-    path: `/api/guardians/{id}`,
+    path: `/guardians/{id}`,
     body: guardian,
   });
 }
