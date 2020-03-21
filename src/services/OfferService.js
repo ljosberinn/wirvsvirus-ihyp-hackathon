@@ -8,7 +8,7 @@ import { Offer } from './entities/Offer';
 export async function getAllOffers() {
   const request = await httpRequest({
     method: 'GET',
-    path: '/api/offers',
+    path: '/offers',
     type: Offer,
   });
   return request.response;
@@ -22,7 +22,7 @@ export async function getAllOffers() {
 export async function getOffer(id) {
   const request = await httpRequest({
     method: 'GET',
-    path: `/api/offers/${id}`,
+    path: `/offers/${id}`,
     type: Offer,
   });
   return request.response;
@@ -36,7 +36,7 @@ export async function getOffer(id) {
 export async function deleteOffer(id) {
   await httpRequest({
     method: 'DELETE',
-    path: `/api/offers/${id}`,
+    path: `/offers/${id}`,
   });
 }
 
@@ -48,7 +48,7 @@ export async function deleteOffer(id) {
 export async function createOffer(offer) {
   const request = await httpRequest({
     method: 'POST',
-    path: `/api/offers`,
+    path: `/offers`,
     body: offer,
     type: Offer,
   });
@@ -64,7 +64,7 @@ export async function createOffer(offer) {
 export async function updateOffer(id, offer) {
   await httpRequest({
     method: 'POST',
-    path: `/api/offers/{id}`,
+    path: `/offers/{id}`,
     body: offer,
   });
 }

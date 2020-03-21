@@ -8,7 +8,7 @@ import { Request } from './entities/Request';
 export async function getAllRequests() {
   const request = await httpRequest({
     method: 'GET',
-    path: '/api/requests',
+    path: '/requests',
     type: Request,
   });
   return request.response;
@@ -22,7 +22,7 @@ export async function getAllRequests() {
 export async function getRequest(id) {
   const request = await httpRequest({
     method: 'GET',
-    path: `/api/requests/${id}`,
+    path: `/requests/${id}`,
     type: Request,
   });
   return request.response;
@@ -36,7 +36,7 @@ export async function getRequest(id) {
 export async function deleteRequest(id) {
   await httpRequest({
     method: 'DELETE',
-    path: `/api/requests/${id}`,
+    path: `/requests/${id}`,
   });
 }
 
@@ -48,7 +48,7 @@ export async function deleteRequest(id) {
 export async function createRequest(request) {
   const r = await httpRequest({
     method: 'POST',
-    path: `/api/requests`,
+    path: `/requests`,
     body: request,
     type: Request,
   });
@@ -64,7 +64,7 @@ export async function createRequest(request) {
 export async function updateRequest(id, request) {
   await httpRequest({
     method: 'POST',
-    path: `/api/requests/{id}`,
+    path: `/requests/{id}`,
     body: request,
   });
 }

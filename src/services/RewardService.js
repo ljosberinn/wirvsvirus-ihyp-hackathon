@@ -8,7 +8,7 @@ import { Reward } from './entities/Reward';
 export async function getAllRewards() {
   const request = await httpRequest({
     method: 'GET',
-    path: '/api/rewards',
+    path: '/rewards',
     type: Reward,
   });
   return request.response;
@@ -22,7 +22,7 @@ export async function getAllRewards() {
 export async function getReward(id) {
   const request = await httpRequest({
     method: 'GET',
-    path: `/api/rewards/${id}`,
+    path: `/rewards/${id}`,
     type: Reward,
   });
   return request.response;
@@ -36,7 +36,7 @@ export async function getReward(id) {
 export async function deleteReward(id) {
   await httpRequest({
     method: 'DELETE',
-    path: `/api/rewards/${id}`,
+    path: `/rewards/${id}`,
   });
 }
 
@@ -48,7 +48,7 @@ export async function deleteReward(id) {
 export async function createReward(reward) {
   const r = await httpRequest({
     method: 'POST',
-    path: `/api/rewards`,
+    path: `/rewards`,
     body: reward,
     type: Reward,
   });
@@ -64,7 +64,7 @@ export async function createReward(reward) {
 export async function updateReward(id, reward) {
   await httpRequest({
     method: 'POST',
-    path: `/api/rewards/{id}`,
+    path: `/rewards/{id}`,
     body: reward,
   });
 }

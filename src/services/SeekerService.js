@@ -8,7 +8,7 @@ import { Seeker } from './entities/Seeker';
 export async function getAllSeeker() {
   const request = await httpRequest({
     method: 'GET',
-    path: '/api/seeker',
+    path: '/seeker',
     type: Seeker,
   });
   return request.response;
@@ -22,7 +22,7 @@ export async function getAllSeeker() {
 export async function getSeeker(id) {
   const request = await httpRequest({
     method: 'GET',
-    path: `/api/seeker/${id}`,
+    path: `/seeker/${id}`,
     type: Seeker,
   });
   return request.response;
@@ -36,7 +36,7 @@ export async function getSeeker(id) {
 export async function deleteSeeker(id) {
   await httpRequest({
     method: 'DELETE',
-    path: `/api/seeker/${id}`,
+    path: `/seeker/${id}`,
   });
 }
 
@@ -48,7 +48,7 @@ export async function deleteSeeker(id) {
 export async function createSeeker(seeker) {
   const request = await httpRequest({
     method: 'POST',
-    path: `/api/seeker`,
+    path: `/seeker`,
     body: seeker,
     type: Seeker,
   });
@@ -64,7 +64,7 @@ export async function createSeeker(seeker) {
 export async function updateSeeker(id, seeker) {
   await httpRequest({
     method: 'POST',
-    path: `/api/seeker/{id}`,
+    path: `/seeker/{id}`,
     body: seeker,
   });
 }
