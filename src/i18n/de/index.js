@@ -2,6 +2,7 @@ import error from './error.json';
 import footer from './footer.json';
 import login from './login.json';
 import navigation from './navigation.json';
+import onboarding from './onboarding.json';
 import privacyPolicy from './privacyPolicy.json';
 import registration from './registration.json';
 import resetPassword from './resetPassword.json';
@@ -19,5 +20,6 @@ export default {
     routes,
     settings,
     resetPassword,
+    onboarding,
   },
 };

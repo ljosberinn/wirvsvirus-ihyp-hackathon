@@ -1,0 +1,25 @@
+{
+  "contactData": "Kontaktdaten",
+  "salutation": "Anrede",
+  "firstName": "Vorname",
+  "lastName": "Nachname",
+  "phone": "Telefonnummer",
+
+  "activities": "Tätigkeiten",
+  "helpRadius": "Du kannst helfen im Umkreis von:",
+  "address": "Stadt / PLZ",
+  "activityLabel": "Bei folgenden Tätigkeiten:",
+  "activity-groceries": "Einkaufen",
+  "activity-pets": "Hund Gassi führen",
+  "activity-home": "Kleine Hausarbeiten",
+  "activity-sharing": "Dinge teilen",
+
+  "back": "Zurück",
+  "continue": "Weiter",
+
+  "photo": "Foto",
+  "request-photo": "Lade bitte noch ein Foto von Dir hoch, damit unsere Hilfesuchenden Dich erkennen",
+  "upload": "Jetzt hochladen",
+
+  "completeRegistration": "Registrierung abschließen"
+}

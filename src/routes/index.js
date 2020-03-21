@@ -11,9 +11,26 @@ const RedirectToHome = LoadableComponent(() =>
 export default memo(function Routes() {
   const { routes } = useNavigationContext();
 
+  const { modals, regularRoutes } = Object.values(routes).reduce(
+    (carry, route) => {
+      if (route.isModal) {
+        return { ...carry, modals: [...carry.modals, route] };
+      }
+
+      return { ...carry, regularRoutes: [...carry.regularRoutes, route] };
+    },
+    {
+      modals: [],
+      regularRoutes: [],
+    },
+  );
+
   return (
     <Switch>
-      {Object.values(routes).map(({ routerPath, component }) => (
+      {modals.map(({ routerPath, component }) => (
+        <Route path={routerPath} component={component} key={routerPath} />
+      ))}
+      {regularRoutes.map(({ routerPath, component }) => (
         <Route path={routerPath} component={component} exact key={routerPath} />
       ))}
       <Route component={RedirectToHome} />

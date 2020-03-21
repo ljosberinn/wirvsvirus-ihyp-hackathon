@@ -10,7 +10,7 @@ export const LANDING_PAGE = {
   visibleInDrawerNav: false,
   component: LoadableComponent(() =>
     withMaxDelay(
-      import(/* webpackChunkName: "public.landing_page" */ './LandingPage'),
+      import(/* webpackChunkName: "private.landing_page" */ './LandingPage'),
     ),
   ),
 };
@@ -24,6 +24,22 @@ export const SETTINGS = {
   component: LoadableComponent(() =>
     withMaxDelay(
       import(/* webpackChunkName: "private.settings" */ './SettingsRoute'),
+    ),
+  ),
+};
+
+export const ONBOARDING_MODAL = {
+  routerPath: '/',
+  clientPath: '/',
+  title: 'routes:onboardingModal',
+  icon: undefined,
+  visibleInDrawerNav: false,
+  isModal: true,
+  component: LoadableComponent(() =>
+    withMaxDelay(
+      import(
+        /* webpackChunkName: "private.onboarding_modal" */ './OnboardingModal'
+      ),
     ),
   ),
 };
