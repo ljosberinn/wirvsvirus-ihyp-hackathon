@@ -1,5 +1,5 @@
 import { Dropdown, Image, Button } from 'rbx';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaSignOutAlt, FaAngleDown } from 'react-icons/fa';
 import { FaTasks } from 'react-icons/fa';
@@ -8,17 +8,25 @@ import { NavLink } from 'react-router-dom';
 
 import { withSuspense } from '../../hocs';
 import { useNavigate } from '../../hooks';
+import { getGuardian } from '../../services/GuardianService';
 import Icon from '../Icon';
 import Loader from '../Loader';
 import styles from './AuthenticatedNavButtons.module.scss';
 
 export default withSuspense(function AuthenticatedNavButtons() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [guardian, setGuardian] = useState(null);
   const { user } = useIdentityContext();
 
   const { logoutUser } = useIdentityContext();
   const { t } = useTranslation(['navigation', 'routes']);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.user_metadata.guardian) {
+      getGuardian(user.id).then(setGuardian);
+    }
+  }, [user]);
 
   function handleLogout() {
     navigate('/');
@@ -38,11 +46,9 @@ export default withSuspense(function AuthenticatedNavButtons() {
     );
   }
 
-  if (!user.user_metadata?.guardian) {
+  if (!guardian) {
     return null;
   }
-
-  const { guardian } = user.user_metadata;
 
   return (
     <>
