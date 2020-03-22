@@ -25,6 +25,8 @@
       background-color: white;
       display: flex;
       flex-direction: row;
+      height: 100%;
+      margin-bottom: 1.5rem;
       & > .leftContainer {
         padding: 1rem;
         box-sizing: border-box;
