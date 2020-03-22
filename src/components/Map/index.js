@@ -114,7 +114,31 @@ function MapBody({ requests }) {
     });
 }
 
-function RequestModal({ request }) {
+const formatText = text => {
+  if (text.startsWith('Bot:')) {
+    return (
+      <>
+        <strong>Bot</strong>
+        {text.replace('Bot', '')}
+      </>
+    );
+  }
+
+  if (text.startsWith('Hilfesuchender')) {
+    return (
+      <>
+        <strong>Hilfesuchender</strong>
+        {text.replace('Hilfesuchender', '')}
+      </>
+    );
+  }
+
+  return text;
+};
+
+function RequestModal({
+  request: { task, requestState, audio, date, id: requestId, comment },
+}) {
   const { t } = useTranslation('onboarding');
   const push = useNavigate();
   const {
@@ -123,7 +147,7 @@ function RequestModal({ request }) {
 
   function handleAcceptRequest() {
     toast({ content: 'Du hast dir die Aufgabe zugewiesen.' });
-    updateRequest(request.id, { guardian: id, requestState: 'progress' })
+    updateRequest(requestId, { guardian: id, requestState: 'progress' })
       .then(() => {
         push(TASKS.routerPath);
       })
@@ -131,7 +155,7 @@ function RequestModal({ request }) {
   }
 
   function renderActionButton() {
-    if (request.requestState === 'pending') {
+    if (requestState === 'pending') {
       return (
         <Button
           type="button"
@@ -151,8 +175,7 @@ function RequestModal({ request }) {
         <Card.Header className={styles.cardHeader}>
           <Card.Header.Title className={styles.cardHeaderTitle}>
             <div className={styles.titleText}>
-              Hilfegesuch{' '}
-              {request.task && t(`activity-${request.task.toLowerCase()}`)}
+              Hilfegesuch {task && t(`activity-${task.toLowerCase()}`)}
             </div>
             <div className={styles.karma}>{20}</div>
           </Card.Header.Title>
@@ -160,16 +183,30 @@ function RequestModal({ request }) {
         <Card.Content className={styles.cardContent}>
           <Content>
             <div className={styles.cardTitle}>
-              {request.date && (
+              {date && (
                 <div className={styles.date}>
                   vom{' '}
-                  {new Intl.DateTimeFormat('de-DE').format(
-                    Date.parse(request.date),
-                  )}
+                  {new Intl.DateTimeFormat('de-DE').format(Date.parse(date))}
                 </div>
               )}
             </div>
-            <p>{request.comment}</p>
+            {comment &&
+              comment
+                .split('\n')
+                .filter(text => text !== 'Bot: undefined')
+                .map((text, index) => {
+                  return (
+                    <p key={index}>
+                      {formatText(text)}
+                      <br />
+                    </p>
+                  );
+                })}
+            {audio && (
+              <audio controls src={audio} preload="metadata">
+                Ihr Browser unterstützt leider keine Audiodateien.
+              </audio>
+            )}
           </Content>
         </Card.Content>
         <Card.Footer className={styles.cardFooter}>

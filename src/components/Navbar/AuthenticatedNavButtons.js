@@ -1,5 +1,5 @@
 import { Dropdown, Image, Button } from 'rbx';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaSignOutAlt, FaAngleDown } from 'react-icons/fa';
 import { FaTasks } from 'react-icons/fa';
@@ -8,23 +8,13 @@ import { NavLink } from 'react-router-dom';
 
 import { withSuspense } from '../../hocs';
 import { useNavigate } from '../../hooks';
-import { getGuardian } from '../../services/GuardianService';
 import Icon from '../Icon';
 import Loader from '../Loader';
 import styles from './AuthenticatedNavButtons.module.scss';
 
 export default withSuspense(function AuthenticatedNavButtons() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [guardian, setGuardian] = useState(null);
-  const {
-    user: { id },
-  } = useIdentityContext();
-
-  useEffect(() => {
-    getGuardian(id)
-      .then(setGuardian)
-      .catch(console.error);
-  }, [id]);
+  const { user } = useIdentityContext();
 
   const { logoutUser } = useIdentityContext();
   const { t } = useTranslation(['navigation', 'routes']);
@@ -38,15 +28,21 @@ export default withSuspense(function AuthenticatedNavButtons() {
   }
 
   function renderAvatar() {
-    if (guardian) {
-      return (
-        <div>
-          <div className={styles.name}>{guardian.firstName} {guardian.lastName}</div>
-          <div className={styles.karma}>Karma {guardian.karma}</div>
+    return (
+      <div>
+        <div className={styles.name}>
+          {guardian.firstName} {guardian.lastName}
         </div>
-      );
-    }
+        <div className={styles.karma}>Karma {guardian.karma}</div>
+      </div>
+    );
   }
+
+  if (!user.user_metadata?.guardian) {
+    return null;
+  }
+
+  const { guardian } = user.user_metadata;
 
   return (
     <>
@@ -57,9 +53,7 @@ export default withSuspense(function AuthenticatedNavButtons() {
               <Image.Container size={32}>
                 <Image src={guardian ? guardian.img : undefined} rounded />
               </Image.Container>
-              <span>
-                {renderAvatar()}
-              </span>
+              <span>{renderAvatar()}</span>
               <Icon svg={FaAngleDown} />
             </div>
           </Dropdown.Trigger>
