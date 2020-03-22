@@ -1,45 +1,33 @@
-import classnames from 'classnames';
-import { Button } from 'rbx';
-import React, { lazy, useState } from 'react';
+import { Dropdown, Image, Button } from 'rbx';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaSignOutAlt, FaAngleDown } from 'react-icons/fa';
 import { useIdentityContext } from 'react-netlify-identity';
-import { useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import { useNavigationContext } from '../../context';
 import { withSuspense } from '../../hocs';
 import { useNavigate } from '../../hooks';
+import { getGuardian } from '../../services/GuardianService';
 import Icon from '../Icon';
 import Loader from '../Loader';
+import styles from './AuthenticatedNavButtons.module.scss';
 
-const NavButton = lazy(() =>
-  import(/* webpackChunkName: "navbar.nav_button" */ './NavButton'),
-);
-
-/**
- *
- * @param {{
- * isLoggingOut: boolean,
- * isConfirmedUser: boolean,
- * handleLogout: () => Promise<void>,
- * t: import('react-i18next').UseTranslationResponse['t']
- * }}
- */
 export default withSuspense(function AuthenticatedNavButtons() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [guardian, setGuardian] = useState(null);
   const {
-    routes: { SETTINGS },
-    PreloadingLink,
-  } = useNavigationContext();
+    user: { id },
+  } = useIdentityContext();
+
+  useEffect(() => {
+    getGuardian(id)
+      .then(setGuardian)
+      .catch(console.error);
+  }, [id]);
 
   const { logoutUser } = useIdentityContext();
-  const { pathname } = useLocation();
   const { t } = useTranslation(['navigation', 'routes']);
   const navigate = useNavigate();
-
-  if (!SETTINGS) {
-    return null;
-  }
 
   function handleLogout() {
     navigate('/');
@@ -51,26 +39,36 @@ export default withSuspense(function AuthenticatedNavButtons() {
   return (
     <>
       <Button.Group>
-        <PreloadingLink
-          as={NavButton}
-          color="primary"
-          to={SETTINGS}
-          disabled={isLoggingOut}
-        >
-          <Icon
-            svg={SETTINGS.icon}
-            className={classnames(
-              'is-spinning',
-              pathname.includes('/settings/') && 'active',
-            )}
-          />
-          <span>{t('routes:settings')}</span>
-        </PreloadingLink>
-
-        <Button color="danger" onClick={handleLogout} disabled={isLoggingOut}>
-          <Icon svg={FaSignOutAlt} />
-          <span>{t('logout')}</span>
-        </Button>
+        <Dropdown hoverable>
+          <Dropdown.Trigger>
+            <div className={styles.profile}>
+              <Image.Container size={32}>
+                <Image src={guardian ? guardian.img : undefined} rounded />
+              </Image.Container>
+              <span>
+                {guardian &&
+                  `${guardian.firstName} ${guardian.lastName} (${guardian.karma})`}
+              </span>
+              <Icon svg={FaAngleDown} />
+            </div>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Content>
+              <Dropdown.Item as={NavLink} to="/aufgaben">
+                Meine Aufgaben
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item
+                color="danger"
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+              >
+                <Icon svg={FaSignOutAlt} />
+                <span>{t('logout')}</span>
+              </Dropdown.Item>
+            </Dropdown.Content>
+          </Dropdown.Menu>
+        </Dropdown>
       </Button.Group>
       {isLoggingOut && <Loader isFullPage />}
     </>

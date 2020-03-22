@@ -3,9 +3,6 @@ import React, { lazy } from 'react';
 import { useIdentityContext } from 'react-netlify-identity';
 
 import withSuspense from '../../hocs/withSuspense';
-import DiscordLink from '../DiscordLink';
-import GithubLink from '../GithubLink';
-import ThemeSwitch from '../ThemeSwitch';
 
 const AuthenticatedNavButtons = lazy(() =>
   import(
@@ -30,12 +27,7 @@ export default withSuspense(function Menu() {
 
   return (
     <Navbar.Menu className="is-active">
-      <Navbar.Segment align="end">
-        <ThemeSwitch from="nav" />
-        <DiscordLink from="nav" />
-        <GithubLink from="nav" />
-        {authAwareButtons}
-      </Navbar.Segment>
+      <Navbar.Segment align="end">{authAwareButtons}</Navbar.Segment>
     </Navbar.Menu>
   );
 });
