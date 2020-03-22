@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from '../RequestPage.module.scss';
 
-export default function StepOne({values, onChange}) {
+export default function StepOne({ values, onChange }) {
   return (
     <div className={classnames(styles.step, styles.stepOne)}>
       <div className={styles.stepTitle}>Wie dürfen wir dich nennen?</div>
@@ -14,9 +14,10 @@ export default function StepOne({values, onChange}) {
           placeholder="Name"
           name="name"
           id="name"
-          onInput={(e) => onChange(e, 'completeName')}
+          onInput={e => onChange(e, 'completeName')}
           defaultValue={values.completeName}
-          required />
+          required
+        />
       </div>
     </div>
   );
