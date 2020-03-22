@@ -66,11 +66,11 @@ export default withSentry(function LandingPage() {
                   Alternativ kannst Du Dir auch telefonisch oder per WhatsApp
                   Hilfe wünschen.
                 </p>
-                <div class={styles.phone}>
+                <div className={styles.phone}>
                   <span>Anrufen unter</span>
                   <span>068 - 50 98 56 86</span>
                 </div>
-                <div class={styles.phone}>
+                <div className={styles.phone}>
                   <span>WhatsApp unter</span>
                   <span>001 415 523 - 8886</span>
                 </div>
