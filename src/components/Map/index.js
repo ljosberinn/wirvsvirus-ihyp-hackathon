@@ -114,6 +114,28 @@ function MapBody({ requests }) {
     });
 }
 
+const formatText = text => {
+  if (text.startsWith('Bot:')) {
+    return (
+      <>
+        <strong>Bot</strong>
+        {text.replace('Bot', '')}
+      </>
+    );
+  }
+
+  if (text.startsWith('Hilfesuchender')) {
+    return (
+      <>
+        <strong>Hilfesuchender</strong>
+        {text.replace('Hilfesuchender', '')}
+      </>
+    );
+  }
+
+  return text;
+};
+
 function RequestModal({
   request: { task, requestState, audio, date, id: requestId, comment },
 }) {
@@ -168,7 +190,18 @@ function RequestModal({
                 </div>
               )}
             </div>
-            {comment && <p>{comment}</p>}
+            {comment &&
+              comment
+                .split('\n')
+                .filter(text => text !== 'Bot: undefined')
+                .map((text, index) => {
+                  return (
+                    <p key={index}>
+                      {formatText(text)}
+                      <br />
+                    </p>
+                  );
+                })}
             {audio && (
               <audio controls src={audio} preload="metadata">
                 Ihr Browser unterstützt leider keine Audiodateien.
