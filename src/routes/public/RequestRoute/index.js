@@ -37,7 +37,7 @@ export default withSentry(function RequestPage() {
       return renderSent();
     } else {
       const ActiveStep = steps[step];
-      return <ActiveStep values={form} onChange={handleFormChange}/>;
+      return <ActiveStep values={form} onChange={handleFormChange} />;
     }
   }
 
@@ -70,7 +70,8 @@ export default withSentry(function RequestPage() {
       <div className={classnames(styles.step, styles.stepFinish)}>
         <div className={styles.stepTitle}>Anfrage wurde abgesendet!</div>
         <div className={styles.stepContent}>
-          Sobald sich ein freiwilliger Helfer findet bekommst du eine Benachrichtigung.
+          Sobald sich ein freiwilliger Helfer findet bekommst du eine
+          Benachrichtigung.
         </div>
       </div>
     );
@@ -78,7 +79,10 @@ export default withSentry(function RequestPage() {
 
   function renderPrevious() {
     return (
-      <div className={classnames(styles.button, styles.secondary)} onClick={handlePreviousStep}>
+      <div
+        className={classnames(styles.button, styles.secondary)}
+        onClick={handlePreviousStep}
+      >
         Zurück
       </div>
     );
@@ -106,7 +110,10 @@ export default withSentry(function RequestPage() {
 
   function renderBack() {
     return (
-      <div className={classnames(styles.button)} onClick={() => push(LANDING_PAGE.routerPath)}>
+      <div
+        className={classnames(styles.button)}
+        onClick={() => push(LANDING_PAGE.routerPath)}
+      >
         Zur Startseite
       </div>
     );
@@ -122,11 +129,7 @@ export default withSentry(function RequestPage() {
         </div>
       );
     } else {
-      return (
-        <div className={styles.controls}>
-          {renderBack()}
-        </div>
-      );
+      return <div className={styles.controls}>{renderBack()}</div>;
     }
   }
 

@@ -20,11 +20,38 @@
     justify-content: center;
 
     & > .body {
-      & > .title {
-        font-size: 100px;
-        font-weight: bold;
-        color: #333333;
-        margin-bottom: 20px;
+      max-width: 900px;
+      width: 100%;
+      background-color: white;
+      display: flex;
+      flex-direction: row;
+      & > .leftContainer {
+        padding: 1rem;
+        box-sizing: border-box;
+        width: 300px;
+        img {
+          width: 80%;
+          margin-left: 10%;
+        }
+        p {
+          font-size: 0.75rem;
+          margin-bottom: 1rem;
+        }
+        .phone {
+          text-align: center;
+          & > span:first-child {
+            display: block;
+          }
+          & > span:last-child {
+            display: block;
+            font-size: 2rem;
+            font-weight: bolder;
+          }
+        }
+      }
+      & > .rightContainer {
+        width: 600px;
+        display: flex;
       }
     }
   }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, lazy, memo } from 'react';
 import { useIdentityContext } from 'react-netlify-identity';
-import { useLocation } from 'react-router-dom';
 
 import { hasLocalStorage } from '../../constants/browserAPIs';
 import withSuspense from '../../hocs/withSuspense';
@@ -50,7 +49,6 @@ const persistExpansionToLocalStorage = isExpanded => {
 export default memo(
   withSuspense(function DrawerNav(props) {
     const { isLoggedIn } = useIdentityContext();
-    const { pathname } = useLocation();
     const isDesktop = useMediaQuery('(min-width: 1024px)');
     const wasPreviouslyDesktop = usePrevious(isDesktop);
 
@@ -70,13 +68,13 @@ export default memo(
       }
     }, [isDesktop, isExpanded, wasPreviouslyDesktop]);
 
+    if (!isLoggedIn) {
+      return null;
+    }
+
     function toggleMenu() {
       setIsExpanded(!isExpanded);
       persistExpansionToLocalStorage(!isExpanded);
-    }
-
-    if (!isLoggedIn) {
-      return null;
     }
 
     if (isDesktop) {

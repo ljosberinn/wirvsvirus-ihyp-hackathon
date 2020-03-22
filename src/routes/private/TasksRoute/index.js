@@ -1,4 +1,4 @@
-import { Section, Box, Title, Table, Tag, Button } from 'rbx';
+import { Section, Box, Title, Table, Button } from 'rbx';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIdentityContext } from 'react-netlify-identity';
@@ -20,6 +20,7 @@ export default withSentry(function TasksRoute() {
 
   useEffect(() => {
     fetchRequests();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   function fetchRequests() {
@@ -50,7 +51,7 @@ export default withSentry(function TasksRoute() {
     return {
       pending: 'ausstehend',
       progress: 'in arbeit',
-      confirm: 'in prüfung'
+      confirm: 'in prüfung',
     }[status];
   }
 
@@ -90,49 +91,48 @@ export default withSentry(function TasksRoute() {
 
           <Table fullwidth narrow striped hoverable>
             <thead>
-            <tr>
-              <th>Status</th>
-              <th>Datum</th>
-              <th>Hilfesuchender</th>
-              <th>Typ</th>
-              <th>Mail</th>
-              <th>Addresse</th>
-              <th></th>
-            </tr>
+              <tr>
+                <th>Status</th>
+                <th>Datum</th>
+                <th>Hilfesuchender</th>
+                <th>Typ</th>
+                <th>Mail</th>
+                <th>Addresse</th>
+                <th></th>
+              </tr>
             </thead>
             <tbody>
-            {requests.map(request => {
-              const {
-                id,
-                status,
-                date,
-                completeName,
-                task,
-                email,
-                city,
-                zip,
-                street,
-              } = request;
+              {requests.map(request => {
+                const {
+                  id,
+                  date,
+                  completeName,
+                  task,
+                  email,
+                  city,
+                  zip,
+                  street,
+                } = request;
 
-              return (
-                <tr key={id}>
-                  <td className={styles.requestState}>
-                    <div className={styles[request.requestState]}>{translateStatus(request.requestState)}</div>
-                  </td>
-                  <td>{date}</td>
-                  <td>{completeName} </td>
-                  <td>{task}</td>
-                  <td>{email}</td>
-                  <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
-                  <td>
-                    {renderControls(request)}
-                  </td>
-                </tr>
-              );
-            })}
+                return (
+                  <tr key={id}>
+                    <td className={styles.requestState}>
+                      <div className={styles[request.requestState]}>
+                        {translateStatus(request.requestState)}
+                      </div>
+                    </td>
+                    <td>{date}</td>
+                    <td>{completeName} </td>
+                    <td>{task}</td>
+                    <td>{email}</td>
+                    <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
+                    <td>{renderControls(request)}</td>
+                  </tr>
+                );
+              })}
             </tbody>
             <tfoot>
-            <tr></tr>
+              <tr></tr>
             </tfoot>
           </Table>
         </Box>

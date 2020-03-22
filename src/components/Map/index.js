@@ -8,12 +8,12 @@ import { useIdentityContext } from 'react-netlify-identity';
 import { useGeolocation } from 'react-use';
 import 'tippy.js/dist/tippy.css'; // optional
 
-import { updateRequest } from '../../services/RequestService';
-import Loader from '../Loader';
-import styles from './Map.module.scss';
-import toast from '../../utils/toast';
 import { useNavigate } from '../../hooks';
 import { TASKS } from '../../routes/private';
+import { updateRequest } from '../../services/RequestService';
+import toast from '../../utils/toast';
+import Loader from '../Loader';
+import styles from './Map.module.scss';
 
 const defaultLocation = {
   lng: 11.576124,
@@ -25,18 +25,19 @@ const defaultToken =
   'pk.eyJ1IjoicmV0aW5hZGVzaWduIiwiYSI6ImNrODFnbnpwOTAwajQzZm5zeXFxZjg3ZmwifQ.fP1f-G79abYwRqsMMUx3WQ';
 
 export default function Map({
-                              accessToken = defaultToken,
-                              requests = [],
-                              mapStyle = defaultStyle,
-                              fallbackLocation = defaultLocation,
-                              forceFallback = false,
-                            }) {
-  const Map = useMemo(() => {
-    return ReactMapboxGl({
-      accessToken
-    })
-  }, [accessToken]);
-
+  accessToken = defaultToken,
+  requests = [],
+  mapStyle = defaultStyle,
+  fallbackLocation = defaultLocation,
+  forceFallback = false,
+}) {
+  const Map = useMemo(
+    () =>
+      ReactMapboxGl({
+        accessToken,
+      }),
+    [accessToken],
+  );
 
   const { latitude, longitude, loading } = useGeolocation({
     enableHighAccuracy: true,
@@ -63,9 +64,8 @@ export default function Map({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, location.lat, location.lng]);
 
-
   if (loading || !location.lng || !location.lat) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   return (
@@ -74,8 +74,9 @@ export default function Map({
         zoom={[13]}
         center={[location.lng, location.lat]}
         style={mapStyle}
-        className={styles.mapContainer}>
-        <MapBody requests={requests}/>
+        className={styles.mapContainer}
+      >
+        <MapBody requests={requests} />
       </Map>
     </div>
   );
@@ -101,31 +102,27 @@ function MapBody({ requests }) {
           <Tippy
             interactive
             content={
-              <RequestModal toggleModal={toggleModal} request={request}/>
+              <RequestModal toggleModal={toggleModal} request={request} />
             }
           >
-            <div className={`${styles.marker} ${styles[request.requestState]}`}/>
+            <div
+              className={`${styles.marker} ${styles[request.requestState]}`}
+            />
           </Tippy>
         </Marker>
       );
     });
 }
 
-function ToastContent() {
-  return (<div>Test</div>)
-}
-
 function RequestModal({ request }) {
   const { t } = useTranslation('onboarding');
-  const push = useNavigate()
+  const push = useNavigate();
   const {
     user: { id },
   } = useIdentityContext();
 
-  const ts = new Date(request.date);
-
   function handleAcceptRequest() {
-    toast({content: "Du hast dir die Aufgabe zugewiesen."});
+    toast({ content: 'Du hast dir die Aufgabe zugewiesen.' });
     updateRequest(request.id, { guardian: id, requestState: 'progress' })
       .then(() => {
         push(TASKS.routerPath);
@@ -136,10 +133,15 @@ function RequestModal({ request }) {
   function renderActionButton() {
     if (request.requestState === 'pending') {
       return (
-        <Button type="button" className={styles.actionButton} color="success" onClick={handleAcceptRequest}>
+        <Button
+          type="button"
+          className={styles.actionButton}
+          color="success"
+          onClick={handleAcceptRequest}
+        >
           Annehmen
         </Button>
-      )
+      );
     }
   }
 
@@ -158,15 +160,20 @@ function RequestModal({ request }) {
         <Card.Content className={styles.cardContent}>
           <Content>
             <div className={styles.cardTitle}>
-              <div className={styles.date}>vom {new Intl.DateTimeFormat('de-DE').format(Date.parse(request.date))}</div>
+              {request.date && (
+                <div className={styles.date}>
+                  vom{' '}
+                  {new Intl.DateTimeFormat('de-DE').format(
+                    Date.parse(request.date),
+                  )}
+                </div>
+              )}
             </div>
             <p>{request.comment}</p>
           </Content>
         </Card.Content>
         <Card.Footer className={styles.cardFooter}>
-          <Card.Footer.Item>
-            {renderActionButton()}
-          </Card.Footer.Item>
+          <Card.Footer.Item>{renderActionButton()}</Card.Footer.Item>
         </Card.Footer>
       </Card>
     </Content>
