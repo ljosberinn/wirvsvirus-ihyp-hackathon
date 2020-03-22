@@ -9,7 +9,7 @@ import { useNavigationContext } from '../../../context';
 import { withSentry } from '../../../hocs';
 import { REQUEST } from '../index';
 import styles from './LandingPage.module.scss';
-import logo from './logo_1000.svg';
+import logo from './logo.png';
 
 export default withSentry(function LandingPage() {
   const {
