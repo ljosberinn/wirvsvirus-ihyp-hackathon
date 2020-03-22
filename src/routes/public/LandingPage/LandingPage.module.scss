@@ -20,6 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     & > .body {
       max-width: 900px;
@@ -152,6 +153,11 @@
           }
         }
       }
+    }
+
+    & > .box {
+      margin-bottom: 1.5rem;
+      max-width: 900px;
     }
   }
 }

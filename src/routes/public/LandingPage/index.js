@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { Button, Help } from 'rbx';
+import { Button, Help, Box, Image } from 'rbx';
 import React from 'react';
 import { FaWhatsapp, FaMobile } from 'react-icons/all';
 import { NavLink } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { useNavigationContext } from '../../../context';
 import { withSentry } from '../../../hocs';
 import styles from './LandingPage.module.scss';
 import logo from './logo.png';
+import hackathonLogo from './wirvsvirus_logo.png';
 
 function ButtonNavLink(props) {
   return <Button as={NavLink} {...props} />;
@@ -111,6 +112,11 @@ export default withSentry(function LandingPage() {
               </div>
             </div>
           </div>
+          <Box className={styles.box}>
+            <Image.Container>
+              <Image src={hackathonLogo} />
+            </Image.Container>
+          </Box>
         </div>
       </div>
     </>
