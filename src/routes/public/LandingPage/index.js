@@ -1,14 +1,15 @@
-import { Button } from 'rbx';
+import { Button, Control } from 'rbx';
 import React from 'react';
+import { FaWhatsapp, FaMobile } from 'react-icons/all';
 import { NavLink } from 'react-router-dom';
+import classnames from 'classnames';
 
-import { TemplatedHelmet } from '../../../components';
+import { Icon, TemplatedHelmet } from '../../../components';
 import { useNavigationContext } from '../../../context';
 import { withSentry } from '../../../hocs';
 import { REQUEST } from '../index';
 import styles from './LandingPage.module.scss';
-import logo from './logo_1000.svg';
-import visual from './visual_1000.svg';
+import logo from './logo_1000.png';
 
 export default withSentry(function LandingPage() {
   const {
@@ -24,7 +25,10 @@ export default withSentry(function LandingPage() {
         <div className={styles.content}>
           <div className={styles.body}>
             <div className={styles.leftContainer}>
-              <img src={logo} alt="logo" />
+              <div className={styles.logo}>
+                <img src={logo} alt={'logo'} height={50}/>
+              </div>
+              <div className={styles.name}>Help At Home</div>
               <p>
                 Es gibt viele Menschen, die in der aktuellen Situation bei
                 Aufgaben des Alltags wie Lebensmitteleinkäufen Hilfe benötigen,
@@ -40,44 +44,50 @@ export default withSentry(function LandingPage() {
                 Melde Dich jetzt!
               </p>
               <p> Gemeinsam und füreinander sind wir stark!</p>
-              <div className={styles.buttonContainer}>
-                <Button.Group>
-                  <Button
-                    as={NavLink}
-                    to={REGISTER.clientPath}
-                    type="button"
-                    size="large"
-                    color="primary"
-                  >
-                    Ich biete Hilfe an
-                  </Button>
-
-                  <Button
-                    as={NavLink}
-                    to={REQUEST.clientPath}
-                    type="button"
-                    size="large"
-                    color="info"
-                  >
-                    Ich brauche Hilfe
-                  </Button>
-                </Button.Group>
-                <p>
-                  Alternativ kannst Du Dir auch telefonisch oder per WhatsApp
-                  Hilfe wünschen.
-                </p>
-                <div className={styles.phone}>
-                  <span>Anrufen unter</span>
-                  <span>068 - 50 98 56 86</span>
-                </div>
-                <div className={styles.phone}>
-                  <span>WhatsApp unter</span>
-                  <span>001 415 523 - 8886</span>
-                </div>
-              </div>
             </div>
             <div className={styles.rightContainer}>
-              <img src={visual} alt="visual" />
+              <div>
+                <div className={styles.header}>Was können wir für dich tun?</div>
+                <div className={styles.buttonContainer}>
+                  <Button.Group>
+                    <Button
+                      as={NavLink}
+                      to={REGISTER.clientPath}
+                      type="button"
+                      size="large"
+                      color="primary"
+                      className={styles.button}
+                    >
+                      Ich biete Hilfe an
+                    </Button>
+
+                    <Button
+                      as={NavLink}
+                      to={REQUEST.clientPath}
+                      type="button"
+                      size="large"
+                      color="info"
+                      className={styles.button}
+                    >
+                      Ich brauche Hilfe
+                    </Button>
+                  </Button.Group>
+                </div>
+                <div className={styles.alternative}>
+                  <p>
+                    Alternativ kannst Du Dir auch telefonisch oder per WhatsApp
+                    Hilfe wünschen:
+                  </p>
+                  <div className={styles.phone}>
+                    <Icon className={classnames(styles.icon, styles.mobile)} svg={FaMobile}/>
+                    <span className={styles.number}>068 - 50 98 56 86</span>
+                  </div>
+                  <div className={styles.phone}>
+                    <Icon className={styles.icon} svg={FaWhatsapp}/>
+                    <span className={styles.number}>001 415 523 - 8886</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

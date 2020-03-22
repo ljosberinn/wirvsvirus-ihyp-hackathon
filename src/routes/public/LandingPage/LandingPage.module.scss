@@ -25,25 +25,46 @@
       background-color: white;
       display: flex;
       flex-direction: row;
+      border-radius: 4px;
+      box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
       height: 100%;
       margin-bottom: 1.5rem;
+
       & > .leftContainer {
-        padding: 1rem;
+        padding: 3rem;
         box-sizing: border-box;
-        width: 300px;
-        img {
-          width: 80%;
-          margin-left: 10%;
-        }
-        p {
-          font-size: 0.75rem;
+        width: 400px;
+        background-color: #F7F7F7;
+
+        & > .name {
+          color: #ec7336;
+          font-size: 25px;
+          font-weight: bold;
           margin-bottom: 1rem;
         }
+
+        & > .logo {
+          text-align: center;
+          margin-bottom: 2rem;
+
+          img {
+            width: 150px;
+          }
+        }
+
+        p {
+          font-size: 1rem;
+          margin-bottom: 1rem;
+        }
+
         .phone {
           text-align: center;
+
           & > span:first-child {
             display: block;
           }
+
           & > span:last-child {
             display: block;
             font-size: 2rem;
@@ -51,9 +72,62 @@
           }
         }
       }
+
       & > .rightContainer {
-        width: 600px;
+        width: 500px;
+        padding: 3rem;
         display: flex;
+        justify-content: center;
+        height: 100%;
+
+        & > div {
+          & > .alternative {
+            margin-top: 3rem;
+
+            .phone {
+              display: flex;
+              align-items: center;
+            }
+
+            .icon {
+              margin-right: 1rem;
+
+              &.mobile {
+                svg {
+                  height: 25px;
+                }
+              }
+
+              svg {
+                width: 30px;
+                height: 30px;
+                fill: #ec7336;
+              }
+            }
+
+            .number {
+              font-weight: bold;
+              font-size: 25px;
+              color: #333;
+            }
+          }
+
+          & > .header {
+            font-size: 30px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 3rem;
+          }
+        }
+
+        .button {
+          width: 100%;
+          margin: 0;
+
+          &:first-child {
+            margin-bottom: 1rem;
+          }
+        }
       }
     }
   }
