@@ -4,6 +4,7 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import Icon from '../../Icon';
+import styles from './NavigationLink.module.scss';
 
 /**
  *
@@ -25,6 +26,7 @@ function NavigationLink({ to, svg, children, isExpanded, onClick, active }) {
       tooltip={isExpanded ? undefined : children}
       tooltipPosition={isExpanded ? undefined : 'right'}
       onClick={onClick}
+      className={styles.hideOverflow}
     >
       <Icon svg={svg} />
       <span>{children}</span>

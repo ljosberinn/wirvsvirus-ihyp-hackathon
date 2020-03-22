@@ -32,9 +32,7 @@
   }
 
   &[class*='is-1'] {
-    .box {
-      padding: 0;
-    }
+    width: 48px;
 
     li a {
       text-align: center;
@@ -56,4 +54,9 @@
 
 .transform270 {
   transform: rotate(90deg);
+}
+
+.hideOverflow {
+  overflow: hidden;
+  white-space: nowrap;
 }

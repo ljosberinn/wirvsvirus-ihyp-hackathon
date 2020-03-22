@@ -33,7 +33,7 @@ export default function Desktop({ isExpanded, toggleMenu, ...rest }) {
                   isExpanded ? styles.transform90 : styles.transform270
                 }
               />
-              <span>{t('toggleMenu')}</span>
+              <span className={styles.hideOverflow}>{t('toggleMenu')}</span>
             </Menu.List.Item>
           </Menu.List>
         </nav>
