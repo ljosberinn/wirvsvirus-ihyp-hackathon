@@ -33,17 +33,17 @@
 
       margin-bottom: 1.5rem;
 
-      @include mobile() {
+      @include mobile {
         display: block;
       }
 
       & > .leftContainer {
-        padding: 3rem;
+        padding: 3rem !important;
         box-sizing: border-box;
         width: 400px;
         background-color: #f7f7f7;
 
-        @include mobile() {
+        @include mobile {
           flex-direction: column;
           padding: 1rem;
           width: 100%;
@@ -91,7 +91,7 @@
         display: flex;
         justify-content: center;
 
-        @include mobile() {
+        @include mobile {
           width: 100%;
         }
 
