@@ -15,6 +15,19 @@ export const LANDING_PAGE = {
   ),
 };
 
+export const REQUEST = {
+  routerPath: '/request',
+  clientPath: '/request',
+  title: 'routes:request',
+  icon: FaUserEdit,
+  visibleInDrawerNav: false,
+  component: LoadableComponent(() =>
+    withMaxDelay(
+      import(/* webpackChunkName: "public.register" */ './RequestRoute'),
+    ),
+  ),
+};
+
 export const REGISTER = {
   routerPath: '/register',
   clientPath: '/register',

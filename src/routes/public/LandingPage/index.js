@@ -2,17 +2,13 @@ import { Button } from 'rbx';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { TemplatedHelmet, Map } from '../../../components';
+import { TemplatedHelmet } from '../../../components';
 import { useNavigationContext } from '../../../context';
 import { withSentry } from '../../../hocs';
+import { REQUEST } from '../index';
 import styles from './LandingPage.module.scss';
 import logo from './logo_1000.svg';
 import visual from './visual_1000.svg';
-
-const defaultLocation = {
-  lng: 48.1828776,
-  lat: 11.5940998,
-};
 
 export default withSentry(function LandingPage() {
   const {
@@ -56,7 +52,13 @@ export default withSentry(function LandingPage() {
                     Ich biete Hilfe an
                   </Button>
 
-                  <Button type="button" size="large" color="info">
+                  <Button
+                    as={NavLink}
+                    to={REQUEST.clientPath}
+                    type="button"
+                    size="large"
+                    color="info"
+                  >
                     Ich brauche Hilfe
                   </Button>
                 </Button.Group>
@@ -79,12 +81,6 @@ export default withSentry(function LandingPage() {
             </div>
           </div>
         </div>
-        <Map
-          accessToken="pk.eyJ1IjoicmV0aW5hZGVzaWduIiwiYSI6ImNrODFnazBkMzA4aGUzZ293azg4MGxud3oifQ.jMmSszx6gA2v9OnztjCA5Q"
-          mapStyle="mapbox://styles/retinadesign/ck82bajtp0f6j1il7sek7byl8"
-          defaultLocation={defaultLocation}
-          forceFallback
-        />
       </div>
     </>
   );

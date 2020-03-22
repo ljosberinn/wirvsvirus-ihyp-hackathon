@@ -1,12 +1,12 @@
 @import '../../../assets/scss/mixins';
 
-@include themedSvg('register', '.container');
-
 .container {
   background-size: 65%;
   background-position-x: 45%;
   background-position-y: 50%;
   display: flex;
+  background-color: transparent;
+  height: 100%;
 
   @include mobile-bg-adjustment();
 }
