@@ -40,7 +40,7 @@ export default function ActivitiesStep({
             min="1"
             max="20"
             step="1"
-            name="radius"
+            name="hah-radius"
             onChange={handleChange}
             value={radius}
             unit="km"
@@ -57,7 +57,7 @@ export default function ActivitiesStep({
             id="address"
             list="address-datalist"
             defaultValue={address}
-            name="address"
+            name="hah-address"
             onChange={handleChange}
             required
             placeholder={t('address')}
@@ -77,7 +77,7 @@ export default function ActivitiesStep({
               <Checkbox
                 id={activity}
                 value={activity}
-                name="activities"
+                name="hah-activities"
                 checked={activities.includes(activity)}
                 onChange={handleChange}
               />

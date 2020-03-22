@@ -131,7 +131,10 @@ export default withSentry(function OnboardingModal() {
     }
   }
 
-  function handleChange({ target: { value, name, type, checked, files } }) {
+  function handleChange({
+    target: { value, name: nameProperty, type, checked, files },
+  }) {
+    const name = nameProperty.replace('hah-', '');
     const key = steps[currentStep].name;
 
     if (type === 'checkbox') {
@@ -218,7 +221,7 @@ export default withSentry(function OnboardingModal() {
 
       <Modal.Content>
         <Box className={styles.box}>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} autoComplete="nope">
             <fieldset disabled={isLoading}>
               <Step.Container
                 isForm

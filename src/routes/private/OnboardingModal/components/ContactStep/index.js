@@ -25,7 +25,7 @@ export default function ContactStep({
             <Select
               required
               onChange={handleChange}
-              name="title"
+              name="hah-title"
               defaultValue={title || titles[0]}
             >
               {titles.map(title => (
@@ -45,7 +45,7 @@ export default function ContactStep({
           <Input
             type="text"
             placeholder="Vorname"
-            name="firstName"
+            name="hah-firstName"
             id="firstName"
             onInput={handleChange}
             autoFocus
@@ -62,7 +62,7 @@ export default function ContactStep({
           <Input
             type="text"
             placeholder="Nachname"
-            name="lastName"
+            name="hah-lastName"
             id="lastName"
             onInput={handleChange}
             required
@@ -78,7 +78,7 @@ export default function ContactStep({
           <Input
             type="text"
             placeholder="Telefonnummer"
-            name="phone"
+            name="hah-phone"
             id="phone"
             onInput={handleChange}
             required

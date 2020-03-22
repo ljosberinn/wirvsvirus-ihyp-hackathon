@@ -25,7 +25,7 @@ export default function ImageStep({ handleChange, img, imgSecurity }) {
             </Image.Container>
           ) : (
             <File.Label>
-              <File.Input name="img" onInput={handleChange} />
+              <File.Input name="hah-img" onInput={handleChange} />
 
               <File.CTA>
                 <File.Icon>
@@ -43,7 +43,7 @@ export default function ImageStep({ handleChange, img, imgSecurity }) {
                 color="primary"
                 id="imgSecurity"
                 onChange={handleChange}
-                name="imgSecurity"
+                name="hah-imgSecurity"
                 checked={imgSecurity}
               />
               <Label htmlFor="imgSecurity">{t('upload-security-label')}</Label>
