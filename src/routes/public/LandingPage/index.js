@@ -84,20 +84,22 @@ export default withSentry(function LandingPage() {
                     Alternativ kannst Du Dir auch telefonisch* oder per
                     WhatsApp** Hilfe wünschen:
                   </p>
-                  <div className={styles.phone}>
-                    <Icon
-                      className={classnames(styles.icon, styles.mobile)}
-                      svg={FaMobile}
-                    />
-                    <span className={styles.number}>
-                      <a href="tel:+015735996669">0157 - 35 99 66 69</a>
-                    </span>
-                  </div>
-                  <div className={styles.phone}>
-                    <Icon className={styles.icon} svg={FaWhatsapp} />
-                    <span className={styles.number}>
-                      <a href="tel:+0014155238886">001 415 523 - 8886</a>
-                    </span>
+                  <div>
+                    <div className={styles.phone}>
+                      <Icon
+                        className={classnames(styles.icon, styles.mobile)}
+                        svg={FaMobile}
+                      />
+                      <span className={styles.number}>
+                        <a href="tel:+015735996669">0157 - 35 99 66 69</a>
+                      </span>
+                    </div>
+                    <div className={styles.phone}>
+                      <Icon className={styles.icon} svg={FaWhatsapp} />
+                      <span className={styles.number}>
+                        <a href="tel:+0014155238886">001 415 523 - 8886</a>
+                      </span>
+                    </div>
                   </div>
                   <div>
                     <Help>* normale Mobilfunkkosten können anfallen</Help>
