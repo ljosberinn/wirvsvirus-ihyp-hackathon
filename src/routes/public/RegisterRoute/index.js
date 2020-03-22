@@ -104,7 +104,7 @@ export default withSentry(function RegisterRoute() {
       </TemplatedHelmet>
       <Section className={styles.container} aria-labelledby="section-title">
         <Column.Group centered className={styles.parent}>
-          <Column widescreen={{ size: 6 }} tablet={{ size: 8 }}>
+          <Column widescreen={{ size: 3 }} tablet={{ size: 8 }}>
             <Card>
               <Card.Content>
                 <Form onSubmit={handleSubmit}>
