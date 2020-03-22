@@ -22,7 +22,12 @@ export default function Desktop({ isExpanded, toggleMenu, ...rest }) {
           <RouteList isExpanded={isExpanded} />
           <Menu.List>
             <Menu.List.Item
-              onClick={toggleMenu}
+              onClick={() => {
+                toggleMenu();
+                setTimeout(() => {
+                  window.dispatchEvent(new Event('resize'));
+                }, 315);
+              }}
               tooltip={isExpanded ? undefined : t('toggleMenu')}
               tooltipPosition="right"
               data-testid="drawer-nav-desktop-toggle"
