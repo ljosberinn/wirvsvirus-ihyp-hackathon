@@ -36,7 +36,12 @@ export default memo(
         >
           <RBXNavbar.Brand>
             <RBXNavbar.Item as={Link} to="/">
-              <img src={logo} height={40} alt={'logo'} />
+              <img
+                src={logo}
+                className={styles.animation}
+                height={40}
+                alt={'logo'}
+              />
             </RBXNavbar.Item>
             <div
               className={classnames('navbar-burger', menuActive && 'is-active')}
