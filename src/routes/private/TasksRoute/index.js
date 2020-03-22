@@ -5,7 +5,6 @@ import { useIdentityContext } from 'react-netlify-identity';
 
 import { TemplatedHelmet } from '../../../components';
 import { withSentry } from '../../../hocs';
-import { useGuardian } from '../../../hooks';
 import {
   getAllRequests,
   updateRequest,
