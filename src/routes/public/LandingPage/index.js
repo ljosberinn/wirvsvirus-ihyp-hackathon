@@ -33,7 +33,7 @@ export default withSentry(function LandingPage() {
                 size="large"
                 color="primary"
               >
-                Ich will helfen
+                Ich brauche Hilfe
               </Button>
 
               <Button type="button" size="large" color="info">
