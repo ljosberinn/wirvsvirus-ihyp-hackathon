@@ -15,16 +15,7 @@ import styles from './AuthenticatedNavButtons.module.scss';
 
 export default withSuspense(function AuthenticatedNavButtons() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [guardian, setGuardian] = useState(null);
-  const {
-    user: { id },
-  } = useIdentityContext();
-
-  useEffect(() => {
-    getGuardian(id)
-      .then(setGuardian)
-      .catch(console.error);
-  }, [id]);
+  const { user } = useIdentityContext();
 
   const { logoutUser } = useIdentityContext();
   const { t } = useTranslation(['navigation', 'routes']);
@@ -38,15 +29,21 @@ export default withSuspense(function AuthenticatedNavButtons() {
   }
 
   function renderAvatar() {
-    if (guardian) {
-      return (
-        <div>
-          <div className={styles.name}>{guardian.firstName} {guardian.lastName}</div>
-          <div className={styles.karma}>Karma {guardian.karma}</div>
+    return (
+      <div>
+        <div className={styles.name}>
+          {guardian.firstName} {guardian.lastName}
         </div>
-      );
-    }
+        <div className={styles.karma}>Karma {guardian.karma}</div>
+      </div>
+    );
   }
+
+  if (!user.user_metadata.guardian) {
+    return null;
+  }
+
+  const { guardian } = user.user_metadata;
 
   return (
     <>
@@ -57,9 +54,7 @@ export default withSuspense(function AuthenticatedNavButtons() {
               <Image.Container size={32}>
                 <Image src={guardian ? guardian.img : undefined} rounded />
               </Image.Container>
-              <span>
-                {renderAvatar()}
-              </span>
+              <span>{renderAvatar()}</span>
               <Icon svg={FaAngleDown} />
             </div>
           </Dropdown.Trigger>
