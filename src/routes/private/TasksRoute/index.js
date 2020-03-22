@@ -1,31 +1,39 @@
 import { Section, Box, Title, Table, Tag, Button } from 'rbx';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useIdentityContext } from 'react-netlify-identity';
 
 import { TemplatedHelmet } from '../../../components';
 import { withSentry } from '../../../hocs';
 import { useGuardian } from '../../../hooks';
-import { getAllRequests } from '../../../services/RequestService';
+import {
+  getAllRequests,
+  updateRequest,
+} from '../../../services/RequestService';
 import styles from './TasksRoute.module.scss';
 
 export default withSentry(function TasksRoute() {
   const { t } = useTranslation('routes');
-  const guardian = useGuardian();
+  const {
+    user: { id },
+  } = useIdentityContext();
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
     getAllRequests()
       .then(requests => {
-        setRequests(
-          requests.filter(
-            request =>
-              request.guardian ===
-              /* guardian.id*/ '574c455b-b21d-46b8-9ba4-f141a810e028',
-          ),
-        );
+        setRequests(requests.filter(request => request.guardian === id));
       })
       .catch(console.error);
-  });
+  }, [id]);
+
+  function handleAbortRequest(request) {
+    updateRequest(request.id, { ...request, guardian: null })
+      .then(() => {
+        setRequests(requests.filter(dataset => dataset.id !== request.id));
+      })
+      .catch(console.error);
+  }
 
   return (
     <>
@@ -49,8 +57,8 @@ export default withSentry(function TasksRoute() {
               </tr>
             </thead>
             <tbody>
-              {requests.map(
-                ({
+              {requests.map(request => {
+                const {
                   id,
                   status,
                   date,
@@ -60,7 +68,9 @@ export default withSentry(function TasksRoute() {
                   city,
                   zip,
                   street,
-                }) => (
+                } = request;
+
+                return (
                   <tr key={id}>
                     <td>
                       <Tag
@@ -79,13 +89,18 @@ export default withSentry(function TasksRoute() {
                     <td>{email}</td>
                     <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
                     <td>
-                      <Button size="small" type="button" color="info">
+                      <Button
+                        size="small"
+                        type="button"
+                        color="info"
+                        onClick={() => handleAbortRequest(request)}
+                      >
                         Aufgabe abgeben
                       </Button>
                     </td>
                   </tr>
-                ),
-              )}
+                );
+              })}
             </tbody>
             <tfoot>
               <tr></tr>

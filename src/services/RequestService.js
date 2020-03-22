@@ -64,7 +64,7 @@ export async function createRequest(request) {
 export async function updateRequest(id, request) {
   await httpRequest({
     method: 'POST',
-    path: `/requests/{id}`,
+    path: `/requests/${id}`,
     body: request,
   });
 }

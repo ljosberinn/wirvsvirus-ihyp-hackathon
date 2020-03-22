@@ -2,6 +2,7 @@ import { Dropdown, Image, Button } from 'rbx';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaSignOutAlt, FaAngleDown } from 'react-icons/fa';
+import { FaTasks } from 'react-icons/fa';
 import { useIdentityContext } from 'react-netlify-identity';
 import { NavLink } from 'react-router-dom';
 
@@ -55,7 +56,8 @@ export default withSuspense(function AuthenticatedNavButtons() {
           <Dropdown.Menu>
             <Dropdown.Content>
               <Dropdown.Item as={NavLink} to="/aufgaben">
-                Meine Aufgaben
+                <Icon svg={FaTasks} />
+                <span>Meine Aufgaben</span>
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item
