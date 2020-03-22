@@ -1,5 +1,5 @@
 import { Dropdown, Image, Button } from 'rbx';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaSignOutAlt, FaAngleDown } from 'react-icons/fa';
 import { FaTasks } from 'react-icons/fa';
@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 
 import { withSuspense } from '../../hocs';
 import { useNavigate } from '../../hooks';
-import { getGuardian } from '../../services/GuardianService';
 import Icon from '../Icon';
 import Loader from '../Loader';
 import styles from './AuthenticatedNavButtons.module.scss';
@@ -39,7 +38,7 @@ export default withSuspense(function AuthenticatedNavButtons() {
     );
   }
 
-  if (!user.user_metadata.guardian) {
+  if (!user.user_metadata?.guardian) {
     return null;
   }
 
