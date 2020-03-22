@@ -8,17 +8,22 @@ import { useGeolocation } from 'react-use';
 import Loader from '../Loader';
 import styles from './Map.module.scss';
 
-const MapLayer = ReactMapboxGl({
-  accessToken:
-    'pk.eyJ1IjoicmV0aW5hZGVzaWduIiwiYSI6ImNrODFnbnpwOTAwajQzZm5zeXFxZjg3ZmwifQ.fP1f-G79abYwRqsMMUx3WQ',
-});
-
-const fallbackLocation = {
+const defaultLocation = {
   lng: 11.576124,
   lat: 48.137154,
 };
 
-export default function Map({ requests }) {
+const defaultStyle = 'mapbox://styles/retinadesign/ck81gqhvb0pg11io6607jo0xo';
+const defaultToken =
+  'pk.eyJ1IjoicmV0aW5hZGVzaWduIiwiYSI6ImNrODFnbnpwOTAwajQzZm5zeXFxZjg3ZmwifQ.fP1f-G79abYwRqsMMUx3WQ';
+
+export default function Map({
+  accessToken = defaultToken,
+  requests = [],
+  mapStyle = defaultStyle,
+  fallbackLocation = defaultLocation,
+  forceFallback = false,
+}) {
   const { latitude, longitude, loading } = useGeolocation({
     enableHighAccuracy: true,
     timeout: 2500,
@@ -26,6 +31,10 @@ export default function Map({ requests }) {
 
   const [location, setLocation] = useState({ lng: null, lat: null, zoom: 13 });
   const [activeRequest, setActiveRequest] = useState(null);
+
+  const MapLayer = ReactMapboxGl({
+    accessToken,
+  });
 
   useEffect(() => {
     /*
@@ -50,15 +59,15 @@ export default function Map({ requests }) {
       const lat = latitude || fallbackLocation.lat;
 
       setLocation({
-        lng,
-        lat,
+        lng: forceFallback ? fallbackLocation.lng : lng,
+        lat: forceFallback ? fallbackLocation.lat : lat,
       });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, location.lat, location.lng]);
 
-  if (loading) {
+  if (loading || !location.lng || !location.lat) {
     return <Loader />;
   }
 
@@ -90,32 +99,30 @@ export default function Map({ requests }) {
       <MapLayer
         zoom={[13]}
         center={[location.lng, location.lat]}
-        style="mapbox://styles/retinadesign/ck81gqhvb0pg11io6607jo0xo"
+        style={mapStyle}
         className={styles.mapContainer}
         onMove={onMove}
       >
         {requests
           .filter(request => !!request.results)
-          .map(({ id, results: { lat, lng } }) => {
-            return (
-              <Marker
-                coordinates={[lng, lat]}
-                onClick={e => toggleModal(e, id)}
-                key={id}
-              >
-                {activeRequest && activeRequest === id ? (
-                  <RequestModal
-                    toggleModal={toggleModal}
-                    request={requests.find(
-                      dataset => dataset.id === activeRequest,
-                    )}
-                  />
-                ) : (
-                  <div className={styles.marker} />
-                )}
-              </Marker>
-            );
-          })}
+          .map(({ id, results: { lat, lng } }) => (
+            <Marker
+              coordinates={[lng, lat]}
+              onClick={e => toggleModal(e, id)}
+              key={id}
+            >
+              {activeRequest && activeRequest === id ? (
+                <RequestModal
+                  toggleModal={toggleModal}
+                  request={requests.find(
+                    dataset => dataset.id === activeRequest,
+                  )}
+                />
+              ) : (
+                <div className={styles.marker} />
+              )}
+            </Marker>
+          ))}
       </MapLayer>
     </div>
   );
@@ -149,7 +156,7 @@ function RequestModal({ request, toggleModal }) {
           </Card.Footer.Item>
           <Card.Footer.Item>
             <Button type="button" onClick={toggleModal}>
-              Cancel
+              Schließen
             </Button>
           </Card.Footer.Item>
         </Card.Footer>
@@ -159,5 +166,7 @@ function RequestModal({ request, toggleModal }) {
 }
 
 Map.propTypes = {
-  requests: PropTypes.array.isRequired,
+  requests: PropTypes.array,
+  mapStype: PropTypes.string,
+  forceFallback: PropTypes.bool,
 };
