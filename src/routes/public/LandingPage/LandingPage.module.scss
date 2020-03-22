@@ -1,3 +1,5 @@
+@import '../../../assets/scss/mixins';
+
 .wrap {
   position: relative;
   width: 100%;
@@ -28,14 +30,26 @@
       border-radius: 4px;
       box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
       overflow: hidden;
-      height: 100%;
+
       margin-bottom: 1.5rem;
+
+      @include mobile() {
+        display: block;
+      }
 
       & > .leftContainer {
         padding: 3rem;
         box-sizing: border-box;
         width: 400px;
         background-color: #F7F7F7;
+
+
+
+        @include mobile() {
+          flex-direction: column;
+          padding: 1rem;
+          width: 100%;
+        }
 
         & > .name {
           color: #ec7336;
@@ -79,6 +93,10 @@
         display: flex;
         justify-content: center;
         height: 100%;
+
+        @include mobile() {
+          width: 100%;
+        }
 
         & > div {
           & > .alternative {
