@@ -57,6 +57,7 @@ export default withSentry(function RequestPage() {
     createRequest({
       ...form,
       requestState: 'pending',
+      date: new Date().toISOString()
     })
       .then(() => {
         setDone(true);
