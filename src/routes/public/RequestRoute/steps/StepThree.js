@@ -1,8 +1,8 @@
 import classnames from 'classnames';
+import { Input } from 'rbx';
 import React from 'react';
 
 import styles from '../RequestPage.module.scss';
-import { Input } from 'rbx';
 
 export default function StepThree({ values, onChange }) {
   return (
@@ -15,8 +15,9 @@ export default function StepThree({ values, onChange }) {
             placeholder="80331"
             name="zip"
             id="zip"
-            onInput={(e) => onChange(e, 'zip')}
-            defaultValue={values.zip}/>
+            onInput={e => onChange(e, 'zip')}
+            defaultValue={values.zip}
+          />
         </div>
         <div className={styles.street}>
           <Input
@@ -24,8 +25,9 @@ export default function StepThree({ values, onChange }) {
             placeholder="Domagkstraße 12"
             name="street"
             id="street"
-            onInput={(e) => onChange(e, 'street')}
-            defaultValue={values.street}/>
+            onInput={e => onChange(e, 'street')}
+            defaultValue={values.street}
+          />
         </div>
       </div>
     </div>

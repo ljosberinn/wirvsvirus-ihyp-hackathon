@@ -26,7 +26,7 @@ export const REQUEST = {
       import(/* webpackChunkName: "public.register" */ './RequestRoute'),
     ),
   ),
-}
+};
 
 export const REGISTER = {
   routerPath: '/register',

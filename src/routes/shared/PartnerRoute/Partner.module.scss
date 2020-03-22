@@ -2,6 +2,15 @@
 
 .container {
   //background-position-x: 50%;
+
+  p {
+    margin-bottom: 1rem;
+    width: 70%;
+  }
+
+  img {
+    width: 70%;
+  }
 }
 
 //@include themedSvg('partner', '.container');
