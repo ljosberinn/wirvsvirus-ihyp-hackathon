@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { Button } from 'rbx';
+import { Button, Help } from 'rbx';
 import React from 'react';
 import { FaWhatsapp, FaMobile } from 'react-icons/all';
 import { NavLink } from 'react-router-dom';
@@ -7,13 +7,17 @@ import { NavLink } from 'react-router-dom';
 import { Icon, TemplatedHelmet } from '../../../components';
 import { useNavigationContext } from '../../../context';
 import { withSentry } from '../../../hocs';
-import { REQUEST } from '../index';
 import styles from './LandingPage.module.scss';
 import logo from './logo.png';
 
+function ButtonNavLink(props) {
+  return <Button as={NavLink} {...props} />;
+}
+
 export default withSentry(function LandingPage() {
   const {
-    routes: { REGISTER },
+    routes: { REGISTER, REQUEST },
+    PreloadingLink,
   } = useNavigationContext();
 
   return (
@@ -52,44 +56,54 @@ export default withSentry(function LandingPage() {
                 </div>
                 <div className={styles.buttonContainer}>
                   <Button.Group>
-                    <Button
-                      as={NavLink}
-                      to={REGISTER.clientPath}
+                    <PreloadingLink
+                      as={ButtonNavLink}
+                      to={REGISTER}
                       type="button"
                       size="large"
                       color="primary"
                       className={styles.button}
                     >
                       Ich biete Hilfe an
-                    </Button>
+                    </PreloadingLink>
 
-                    <Button
-                      as={NavLink}
-                      to={REQUEST.clientPath}
+                    <PreloadingLink
+                      as={ButtonNavLink}
+                      to={REQUEST}
                       type="button"
                       size="large"
                       color="info"
                       className={styles.button}
                     >
                       Ich brauche Hilfe
-                    </Button>
+                    </PreloadingLink>
                   </Button.Group>
                 </div>
                 <div className={styles.alternative}>
                   <p>
-                    Alternativ kannst Du Dir auch telefonisch oder per WhatsApp
-                    Hilfe wünschen:
+                    Alternativ kannst Du Dir auch telefonisch* oder per
+                    WhatsApp** Hilfe wünschen:
                   </p>
                   <div className={styles.phone}>
                     <Icon
                       className={classnames(styles.icon, styles.mobile)}
                       svg={FaMobile}
                     />
-                    <span className={styles.number}>068 - 50 98 56 86</span>
+                    <span className={styles.number}>
+                      <a href="tel:+015735996669">0157 - 35 99 66 69</a>
+                    </span>
                   </div>
                   <div className={styles.phone}>
                     <Icon className={styles.icon} svg={FaWhatsapp} />
-                    <span className={styles.number}>001 415 523 - 8886</span>
+                    <span className={styles.number}>
+                      <a href="tel:+0014155238886">001 415 523 - 8886</a>
+                    </span>
+                  </div>
+                  <div>
+                    <Help>* normale Mobilfunkkosten können anfallen</Help>
+                    <Help>
+                      ** muss zu Testzwecken noch freigeschaltet werden
+                    </Help>
                   </div>
                 </div>
               </div>
