@@ -24,6 +24,10 @@ export default function Map({
   fallbackLocation = defaultLocation,
   forceFallback = false,
 }) {
+  const MapLayer = ReactMapboxGl({
+    accessToken,
+  });
+
   const { latitude, longitude, loading } = useGeolocation({
     enableHighAccuracy: true,
     timeout: 2500,
@@ -31,23 +35,6 @@ export default function Map({
 
   const [location, setLocation] = useState({ lng: null, lat: null, zoom: 13 });
   const [activeRequest, setActiveRequest] = useState(null);
-
-  const MapLayer = ReactMapboxGl({
-    accessToken,
-  });
-
-  useEffect(() => {
-    /*
-      map.on('move', () => {
-        setLocation({
-          lng: map.getCenter().lng.toFixed(4),
-          lat: map.getCenter().lat.toFixed(4),
-          zoom: map.getZoom().toFixed(2),
-        });
-      });
-
-      */
-  }, []);
 
   useEffect(() => {
     if (loading) {
@@ -78,22 +65,6 @@ export default function Map({
     setActiveRequest(activeRequest ? null : id);
   }
 
-  function onMove(event) {
-    return;
-    const {
-      transform: { _center, _zoom },
-    } = event;
-    const { lng, lat } = _center;
-
-    console.log({ lng, lat });
-
-    setLocation({
-      lng: lng.toFixed(4),
-      lat: lat.toFixed(4),
-      zoom: _zoom.toFixed(2),
-    });
-  }
-
   return (
     <div className={styles.map}>
       <MapLayer
@@ -101,7 +72,6 @@ export default function Map({
         center={[location.lng, location.lat]}
         style={mapStyle}
         className={styles.mapContainer}
-        onMove={onMove}
       >
         {requests
           .filter(request => !!request.results)
