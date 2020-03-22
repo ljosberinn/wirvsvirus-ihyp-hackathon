@@ -95,6 +95,7 @@ export default withSentry(function TasksRoute() {
                 <th>Status</th>
                 <th>Datum</th>
                 <th>Hilfesuchender</th>
+                <th>Anruf</th>
                 <th>Typ</th>
                 <th>Mail</th>
                 <th>Addresse</th>
@@ -106,6 +107,7 @@ export default withSentry(function TasksRoute() {
                 const {
                   id,
                   date,
+                  audio,
                   completeName,
                   task,
                   email,
@@ -122,7 +124,14 @@ export default withSentry(function TasksRoute() {
                       </div>
                     </td>
                     <td>{date}</td>
-                    <td>{completeName} </td>
+                    <td>{completeName}</td>
+                    <td>
+                      {audio && (
+                        <audio controls src={audio} preload="metadata">
+                          Ihr Browser unterstützt leider keine Audiodateien.
+                        </audio>
+                      )}
+                    </td>
                     <td>{task}</td>
                     <td>{email}</td>
                     <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
