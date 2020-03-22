@@ -75,7 +75,7 @@ export default memo(
       persistExpansionToLocalStorage(!isExpanded);
     }
 
-    if (!isLoggedIn && pathname === '/') {
+    if (!isLoggedIn) {
       return null;
     }
 

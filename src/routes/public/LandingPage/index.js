@@ -24,22 +24,27 @@ export default withSentry(function LandingPage() {
       </TemplatedHelmet>
       <div className={styles.wrap}>
         <div className={styles.content}>
-          <div className={styles.buttonContainer}>
-            <Button.Group>
-              <Button
-                as={NavLink}
-                to={REGISTER.clientPath}
-                type="button"
-                size="large"
-                color="primary"
-              >
-                Ich biete Hilfe an
-              </Button>
+          <div className={styles.body}>
+            <div className={styles.title}>
+              Wir gegen Corona.
+            </div>
+            <div className={styles.buttonContainer}>
+              <Button.Group>
+                <Button
+                  as={NavLink}
+                  to={REGISTER.clientPath}
+                  type="button"
+                  size="large"
+                  color="primary"
+                >
+                  Ich biete Hilfe an
+                </Button>
 
-              <Button type="button" size="large" color="info">
-                Ich brauche Hilfe
-              </Button>
-            </Button.Group>
+                <Button type="button" size="large" color="info">
+                  Ich brauche Hilfe
+                </Button>
+              </Button.Group>
+            </div>
           </div>
         </div>
         <Map

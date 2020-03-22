@@ -1,13 +1,15 @@
 [data-theme='light'] .box {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #F7F7F7;
 }
 
 .transitionAll {
   transition: all 0.3s ease;
+  width: 300px !important;
 
   aside {
+    transition: padding 0.3s ease;
     height: 100%;
-    padding: 1.25rem 0;
+    padding: 3rem 0 1.5rem 1.5rem;
 
     nav {
       height: 100%;
@@ -17,7 +19,7 @@
 
       li a {
         display: flex;
-        justify-content: space-between;
+        border-radius: 5px;
 
         span:not(:first-of-type) {
           margin-left: 1rem;
@@ -32,7 +34,11 @@
   }
 
   &[class*='is-1'] {
-    width: 48px;
+    width: 65px !important;
+
+    aside {
+      padding: 3rem 0.5rem 1.5rem 0.5rem;
+    }
 
     li a {
       text-align: center;

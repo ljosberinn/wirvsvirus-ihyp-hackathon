@@ -63,7 +63,7 @@ export async function createReward(reward) {
  */
 export async function updateReward(id, reward) {
   await httpRequest({
-    method: 'POST',
+    method: 'PATCH',
     path: `/rewards/{id}`,
     body: reward,
   });

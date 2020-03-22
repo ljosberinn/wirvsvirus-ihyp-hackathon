@@ -3,7 +3,20 @@
   align-items: center;
   cursor: pointer;
 
+  .name, .karma {
+    line-height: 1rem;
+  }
+
+  .karma {
+    font-size: 12px;
+    color: #4db6ac;
+    font-weight: bold;
+  }
+
   & > figure {
     margin-right: 1rem;
+    border: 1px solid #666666;
+    border-radius: 100%;
+    overflow: hidden;
   }
 }

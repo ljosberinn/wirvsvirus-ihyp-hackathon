@@ -37,6 +37,17 @@ export default withSuspense(function AuthenticatedNavButtons() {
     logoutUser();
   }
 
+  function renderAvatar() {
+    if (guardian) {
+      return (
+        <div>
+          <div className={styles.name}>{guardian.firstName} {guardian.lastName}</div>
+          <div className={styles.karma}>Karma {guardian.karma}</div>
+        </div>
+      );
+    }
+  }
+
   return (
     <>
       <Button.Group>
@@ -47,8 +58,7 @@ export default withSuspense(function AuthenticatedNavButtons() {
                 <Image src={guardian ? guardian.img : undefined} rounded />
               </Image.Container>
               <span>
-                {guardian &&
-                  `${guardian.firstName} ${guardian.lastName} (${guardian.karma})`}
+                {renderAvatar()}
               </span>
               <Icon svg={FaAngleDown} />
             </div>

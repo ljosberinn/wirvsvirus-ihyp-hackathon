@@ -63,7 +63,7 @@ export async function createGuardian(guardian) {
  */
 export async function updateGuardian(id, guardian) {
   await httpRequest({
-    method: 'POST',
+    method: 'PATCH',
     path: `/guardians/{id}`,
     body: guardian,
   });

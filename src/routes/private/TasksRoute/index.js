@@ -19,19 +19,64 @@ export default withSentry(function TasksRoute() {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
+    fetchRequests();
+  }, [id]);
+
+  function fetchRequests() {
     getAllRequests()
       .then(requests => {
         setRequests(requests.filter(request => request.guardian === id));
       })
       .catch(console.error);
-  }, [id]);
+  }
 
   function handleAbortRequest(request) {
-    updateRequest(request.id, { ...request, guardian: null })
+    updateRequest(request.id, { guardian: null, requestState: 'pending' })
       .then(() => {
-        setRequests(requests.filter(dataset => dataset.id !== request.id));
+        fetchRequests();
       })
       .catch(console.error);
+  }
+
+  function handleFinishRequest(request) {
+    updateRequest(request.id, { requestState: 'confirm' })
+      .then(() => {
+        fetchRequests();
+      })
+      .catch(console.error);
+  }
+
+  function translateStatus(status) {
+    return {
+      pending: 'ausstehend',
+      progress: 'in arbeit',
+      confirm: 'in prüfung'
+    }[status];
+  }
+
+  function renderControls(request) {
+    if (request.requestState !== 'confirm') {
+      return (
+        <div className={styles.controls}>
+          <Button
+            size="small"
+            type="button"
+            color="success"
+            onClick={() => handleFinishRequest(request)}
+          >
+            Abgeschlossen
+          </Button>
+          <Button
+            size="small"
+            type="button"
+            color="info"
+            onClick={() => handleAbortRequest(request)}
+          >
+            Aufgabe abgeben
+          </Button>
+        </div>
+      );
+    }
   }
 
   return (
@@ -40,69 +85,54 @@ export default withSentry(function TasksRoute() {
         <title>{t('tasks')}</title>
       </TemplatedHelmet>
       <Section className={styles.container} aria-labelledby="section-title">
-        <Box>
+        <Box shadowless>
           <Title id="section-title">{t('tasks')}</Title>
 
           <Table fullwidth narrow striped hoverable>
             <thead>
-              <tr>
-                <th>Status</th>
-                <th>Datum</th>
-                <th>Hilfesuchender</th>
-                <th>Typ</th>
-                <th>Mail</th>
-                <th>Addresse</th>
-                <th></th>
-              </tr>
+            <tr>
+              <th>Status</th>
+              <th>Datum</th>
+              <th>Hilfesuchender</th>
+              <th>Typ</th>
+              <th>Mail</th>
+              <th>Addresse</th>
+              <th></th>
+            </tr>
             </thead>
             <tbody>
-              {requests.map(request => {
-                const {
-                  id,
-                  status,
-                  date,
-                  completeName,
-                  task,
-                  email,
-                  city,
-                  zip,
-                  street,
-                } = request;
+            {requests.map(request => {
+              const {
+                id,
+                status,
+                date,
+                completeName,
+                task,
+                email,
+                city,
+                zip,
+                street,
+              } = request;
 
-                return (
-                  <tr key={id}>
-                    <td>
-                      <Tag
-                        color={
-                          status === 'pending'
-                            ? 'danger'
-                            : status === 'done'
-                            ? 'success'
-                            : 'warning'
-                        }
-                      />
-                    </td>
-                    <td>{date}</td>
-                    <td>{completeName} </td>
-                    <td>{task}</td>
-                    <td>{email}</td>
-                    <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
-                    <td>
-                      <Button
-                        size="small"
-                        type="button"
-                        color="info"
-                        onClick={() => handleAbortRequest(request)}
-                      >
-                        Aufgabe abgeben
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
+              return (
+                <tr key={id}>
+                  <td className={styles.requestState}>
+                    <div className={styles[request.requestState]}>{translateStatus(request.requestState)}</div>
+                  </td>
+                  <td>{date}</td>
+                  <td>{completeName} </td>
+                  <td>{task}</td>
+                  <td>{email}</td>
+                  <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
+                  <td>
+                    {renderControls(request)}
+                  </td>
+                </tr>
+              );
+            })}
             </tbody>
             <tfoot>
-              <tr></tr>
+            <tr></tr>
             </tfoot>
           </Table>
         </Box>

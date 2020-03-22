@@ -63,7 +63,7 @@ export async function createSkill(skill) {
  */
 export async function updateSkill(id, skill) {
   await httpRequest({
-    method: 'POST',
+    method: 'PATCH',
     path: `/skills/{id}`,
     body: skill,
   });

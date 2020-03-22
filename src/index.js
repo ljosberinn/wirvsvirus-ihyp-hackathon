@@ -9,6 +9,7 @@ import App from './App';
 import { Layout } from './components';
 import { LOGROCKET_ID, SITE_URL, IS_LIVE } from './constants/env';
 import { ThemeProvider, NavigationProvider } from './context';
+import './index.scss';
 
 import './i18n';
 import './utils/errors';

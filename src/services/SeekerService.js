@@ -63,7 +63,7 @@ export async function createSeeker(seeker) {
  */
 export async function updateSeeker(id, seeker) {
   await httpRequest({
-    method: 'POST',
+    method: 'PATCH',
     path: `/seeker/{id}`,
     body: seeker,
   });

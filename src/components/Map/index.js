@@ -1,7 +1,7 @@
 import Tippy from '@tippyjs/react';
 import PropTypes from 'prop-types';
 import { Card, Button, Content } from 'rbx';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import { useIdentityContext } from 'react-netlify-identity';
@@ -11,6 +11,9 @@ import 'tippy.js/dist/tippy.css'; // optional
 import { updateRequest } from '../../services/RequestService';
 import Loader from '../Loader';
 import styles from './Map.module.scss';
+import toast from '../../utils/toast';
+import { useNavigate } from '../../hooks';
+import { TASKS } from '../../routes/private';
 
 const defaultLocation = {
   lng: 11.576124,
@@ -22,15 +25,18 @@ const defaultToken =
   'pk.eyJ1IjoicmV0aW5hZGVzaWduIiwiYSI6ImNrODFnbnpwOTAwajQzZm5zeXFxZjg3ZmwifQ.fP1f-G79abYwRqsMMUx3WQ';
 
 export default function Map({
-  accessToken = defaultToken,
-  requests = [],
-  mapStyle = defaultStyle,
-  fallbackLocation = defaultLocation,
-  forceFallback = false,
-}) {
-  const MapLayer = ReactMapboxGl({
-    accessToken,
-  });
+                              accessToken = defaultToken,
+                              requests = [],
+                              mapStyle = defaultStyle,
+                              fallbackLocation = defaultLocation,
+                              forceFallback = false,
+                            }) {
+  const Map = useMemo(() => {
+    return ReactMapboxGl({
+      accessToken
+    })
+  }, [accessToken]);
+
 
   const { latitude, longitude, loading } = useGeolocation({
     enableHighAccuracy: true,
@@ -57,20 +63,20 @@ export default function Map({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, location.lat, location.lng]);
 
+
   if (loading || !location.lng || !location.lat) {
-    return <Loader />;
+    return <Loader/>;
   }
 
   return (
     <div className={styles.map}>
-      <MapLayer
+      <Map
         zoom={[13]}
         center={[location.lng, location.lat]}
         style={mapStyle}
-        className={styles.mapContainer}
-      >
-        <MapBody requests={requests} />
-      </MapLayer>
+        className={styles.mapContainer}>
+        <MapBody requests={requests}/>
+      </Map>
     </div>
   );
 }
@@ -95,18 +101,23 @@ function MapBody({ requests }) {
           <Tippy
             interactive
             content={
-              <RequestModal toggleModal={toggleModal} request={request} />
+              <RequestModal toggleModal={toggleModal} request={request}/>
             }
           >
-            <div className={styles.marker} />
+            <div className={`${styles.marker} ${styles[request.requestState]}`}/>
           </Tippy>
         </Marker>
       );
     });
 }
 
+function ToastContent() {
+  return (<div>Test</div>)
+}
+
 function RequestModal({ request }) {
   const { t } = useTranslation('onboarding');
+  const push = useNavigate()
   const {
     user: { id },
   } = useIdentityContext();
@@ -114,29 +125,47 @@ function RequestModal({ request }) {
   const ts = new Date(request.date);
 
   function handleAcceptRequest() {
-    updateRequest(request.id, { ...request, guardian: id });
+    toast({content: "Du hast dir die Aufgabe zugewiesen."});
+    updateRequest(request.id, { guardian: id, requestState: 'progress' })
+      .then(() => {
+        push(TASKS.routerPath);
+      })
+      .catch(console.error);
+  }
+
+  function renderActionButton() {
+    if (request.requestState === 'pending') {
+      return (
+        <Button type="button" className={styles.actionButton} color="success" onClick={handleAcceptRequest}>
+          Annehmen
+        </Button>
+      )
+    }
   }
 
   return (
     <Content>
       <Card className={styles.card}>
-        <Card.Header>
-          <Card.Header.Title>
-            Hilfegesuch{' '}
-            {request.task && t(`activity-${request.task.toLowerCase()}`)}
+        <Card.Header className={styles.cardHeader}>
+          <Card.Header.Title className={styles.cardHeaderTitle}>
+            <div className={styles.titleText}>
+              Hilfegesuch{' '}
+              {request.task && t(`activity-${request.task.toLowerCase()}`)}
+            </div>
+            <div className={styles.karma}>{20}</div>
           </Card.Header.Title>
         </Card.Header>
-        <Card.Content>
+        <Card.Content className={styles.cardContent}>
           <Content>
-            <p>{request.date}</p>
+            <div className={styles.cardTitle}>
+              <div className={styles.date}>vom {new Intl.DateTimeFormat('de-DE').format(Date.parse(request.date))}</div>
+            </div>
             <p>{request.comment}</p>
           </Content>
         </Card.Content>
-        <Card.Footer>
+        <Card.Footer className={styles.cardFooter}>
           <Card.Footer.Item>
-            <Button type="button" color="success" onClick={handleAcceptRequest}>
-              Annehmen
-            </Button>
+            {renderActionButton()}
           </Card.Footer.Item>
         </Card.Footer>
       </Card>

@@ -27,7 +27,7 @@ export default memo(function Layout({ children }) {
           {children}
         </Column>
       </Column.Group>
-      <Footer data-testid="footer" />
+
     </>
   );
 });

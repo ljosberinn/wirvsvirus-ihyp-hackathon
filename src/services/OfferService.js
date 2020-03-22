@@ -63,7 +63,7 @@ export async function createOffer(offer) {
  */
 export async function updateOffer(id, offer) {
   await httpRequest({
-    method: 'POST',
+    method: 'PATCH',
     path: `/offers/{id}`,
     body: offer,
   });

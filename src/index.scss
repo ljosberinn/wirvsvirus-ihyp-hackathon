@@ -1,0 +1,32 @@
+html, body {
+  height: 100%;
+  background-color: #F7F7F7;
+  font-family: 'Source Sans Pro', sans-serif !important;
+
+  --c3: #4db6ac;
+  --c13: #ec7336;
+  --c10: #4db6ac;
+  --c36: #4db6ac;
+
+}
+
+.tippy-box {
+  background-color: #ffffff;
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+
+  .tippy-content {
+    padding: 0;
+  }
+
+  .tippy-arrow {
+    color: #ffffff;
+  }
+}
+
+.mapboxgl-ctrl-attrib-inner {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}

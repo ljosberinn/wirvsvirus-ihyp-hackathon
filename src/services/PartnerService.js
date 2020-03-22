@@ -63,7 +63,7 @@ export async function createPartner(partner) {
  */
 export async function updatePartner(id, partner) {
   await httpRequest({
-    method: 'POST',
+    method: 'PATCH',
     path: `/partner/{id}`,
     body: partner,
   });

@@ -36,7 +36,7 @@ export default withSentry(function LandingPage() {
           })),
         );
 
-        setRequests(sanitizedRequests);
+        setRequests(sanitizedRequests.filter((request) => request.requestState === 'pending' || request.requestState === 'progress'));
       })
       .catch(console.error);
   }, []);

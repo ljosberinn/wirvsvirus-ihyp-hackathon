@@ -1,0 +1,30 @@
+.requestState {
+  & > div {
+    border-radius: 100px;
+    display: inline-block;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 2px 10px;
+    font-size: 12px;
+
+
+    &.pending, &.progress {
+      background-color: #ec7336;
+    }
+
+    &.confirm {
+      background-color: #5e52ad;
+    }
+
+    &.done {
+      background-color: #4db6ac;
+    }
+  }
+}
+
+.controls {
+  button:first-child {
+    margin-right: 10px;
+  }
+}
