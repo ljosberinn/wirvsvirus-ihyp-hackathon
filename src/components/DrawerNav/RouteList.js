@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 import { Menu } from 'rbx';
 import React, { lazy } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { FaMap } from 'react-icons/fa';
+import { useLocation, NavLink } from 'react-router-dom';
 
 import { useNavigationContext } from '../../context';
 import { useMediaQuery } from '../../hooks';
+import Icon from '../Icon';
 
 const NavigationLink = lazy(() =>
   import(
@@ -21,6 +23,10 @@ export default function RouteList({ isExpanded }) {
 
   return (
     <Menu.List>
+      <Menu.List.Item as={NavLink} to="/" active={pathname === '/'}>
+        <Icon svg={FaMap} />
+        <span>Übersicht</span>
+      </Menu.List.Item>
       {Object.values(routes)
         .filter(({ visibleInDrawerNav }) => visibleInDrawerNav)
         .map(route => (
