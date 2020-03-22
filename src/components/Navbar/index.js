@@ -3,15 +3,14 @@ import { Navbar as RBXNavbar } from 'rbx';
 import React, { memo, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import logo from './logo.png';
-import { ReactComponent as LogoIpsumSvg } from '../../assets/svg/logoIpsum.svg';
-import { BRAND_NAME } from '../../constants/env';
+
 import withSuspense from '../../hocs/withSuspense';
 import {
   useLocationBasedVisibility,
   useBreakpointBasedVisibility,
 } from '../../hooks';
 import styles from './Navbar.module.scss';
+import logo from './logo.png';
 
 const Menu = withSuspense(
   lazy(() => import(/* webpackChunkName: "navbar.menu" */ './Menu')),

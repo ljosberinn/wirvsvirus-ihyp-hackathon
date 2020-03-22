@@ -1,15 +1,15 @@
-import { Button, Control } from 'rbx';
+import classnames from 'classnames';
+import { Button } from 'rbx';
 import React from 'react';
 import { FaWhatsapp, FaMobile } from 'react-icons/all';
 import { NavLink } from 'react-router-dom';
-import classnames from 'classnames';
 
 import { Icon, TemplatedHelmet } from '../../../components';
 import { useNavigationContext } from '../../../context';
 import { withSentry } from '../../../hocs';
 import { REQUEST } from '../index';
 import styles from './LandingPage.module.scss';
-import logo from './logo_1000.png';
+import logo from './logo_1000.svg';
 
 export default withSentry(function LandingPage() {
   const {
@@ -26,7 +26,7 @@ export default withSentry(function LandingPage() {
           <div className={styles.body}>
             <div className={styles.leftContainer}>
               <div className={styles.logo}>
-                <img src={logo} alt={'logo'} height={50}/>
+                <img src={logo} alt={'logo'} height={50} />
               </div>
               <div className={styles.name}>Help At Home</div>
               <p>
@@ -47,7 +47,9 @@ export default withSentry(function LandingPage() {
             </div>
             <div className={styles.rightContainer}>
               <div>
-                <div className={styles.header}>Was können wir für dich tun?</div>
+                <div className={styles.header}>
+                  Was können wir für dich tun?
+                </div>
                 <div className={styles.buttonContainer}>
                   <Button.Group>
                     <Button
@@ -79,11 +81,14 @@ export default withSentry(function LandingPage() {
                     Hilfe wünschen:
                   </p>
                   <div className={styles.phone}>
-                    <Icon className={classnames(styles.icon, styles.mobile)} svg={FaMobile}/>
+                    <Icon
+                      className={classnames(styles.icon, styles.mobile)}
+                      svg={FaMobile}
+                    />
                     <span className={styles.number}>068 - 50 98 56 86</span>
                   </div>
                   <div className={styles.phone}>
-                    <Icon className={styles.icon} svg={FaWhatsapp}/>
+                    <Icon className={styles.icon} svg={FaWhatsapp} />
                     <span className={styles.number}>001 415 523 - 8886</span>
                   </div>
                 </div>
