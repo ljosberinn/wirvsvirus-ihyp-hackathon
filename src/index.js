@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { Layout } from './components';
 import { LOGROCKET_ID, SITE_URL, IS_LIVE } from './constants/env';
-import { ThemeProvider, NavigationProvider } from './context';
+import { NavigationProvider } from './context';
 import './index.scss';
 
 import './i18n';
@@ -50,17 +50,15 @@ function identifyUser(user) {
 
 render(
   <StrictMode>
-    <ThemeProvider>
-      <Router>
-        <IdentityContextProvider url={SITE_URL} onAuthChange={identifyUser}>
-          <NavigationProvider>
-            <Layout>
-              <App />
-            </Layout>
-          </NavigationProvider>
-        </IdentityContextProvider>
-      </Router>
-    </ThemeProvider>
+    <Router>
+      <IdentityContextProvider url={SITE_URL} onAuthChange={identifyUser}>
+        <NavigationProvider>
+          <Layout>
+            <App />
+          </Layout>
+        </NavigationProvider>
+      </IdentityContextProvider>
+    </Router>
   </StrictMode>,
   document.getElementById('root'),
 );

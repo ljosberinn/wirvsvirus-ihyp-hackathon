@@ -5,7 +5,6 @@ import { FaGithub, FaGoogle, FaBitbucket, FaGitlab } from 'react-icons/fa';
 import { useIdentityContext } from 'react-netlify-identity';
 
 import { ENABLED_PROVIDER } from '../../constants/env';
-import { useTheme } from '../../context';
 import { upperCaseFirstCharacter } from '../../utils';
 import Icon from '../Icon';
 import styles from './LoginProviderGroup.module.scss';
@@ -20,14 +19,13 @@ const iconMap = {
 export default function LoginProviderGroup() {
   const { loginProvider } = useIdentityContext();
   const { t } = useTranslation('registration');
-  const { theme } = useTheme();
 
   return (
     <Button.Group className={styles.buttons}>
       {ENABLED_PROVIDER.map(provider => (
         <Button
           type="button"
-          color={theme === 'light' ? 'info' : undefined}
+          color="info"
           onClick={() => loginProvider(provider)}
           fullwidth
           key={provider}

@@ -3,7 +3,6 @@ import React, { lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNavigationContext } from '../../context';
-import { useTheme } from '../../context';
 import { withSuspense } from '../../hocs';
 import Icon from '../Icon';
 
@@ -13,7 +12,6 @@ const NavButton = lazy(() =>
 
 export default withSuspense(function UnauthenticatedNavButtons() {
   const { t } = useTranslation('routes');
-  const { theme } = useTheme();
   const {
     routes: { LOGIN },
     PreloadingLink,
@@ -25,11 +23,7 @@ export default withSuspense(function UnauthenticatedNavButtons() {
 
   return (
     <Button.Group>
-      <PreloadingLink
-        as={NavButton}
-        color={theme === 'dark' ? 'light' : undefined}
-        to={LOGIN}
-      >
+      <PreloadingLink as={NavButton} to={LOGIN}>
         <Icon svg={LOGIN.icon} />
         <span>{t('login')}</span>
       </PreloadingLink>

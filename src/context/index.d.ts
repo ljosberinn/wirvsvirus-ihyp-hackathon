@@ -19,10 +19,3 @@ export function useNavigationContext(): {
 };
 
 export function NavigationProvider({ children }): JSX.Element;
-
-export function useTheme(): {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
-};
-
-export function ThemeProvider({ children }): JSX.Element;

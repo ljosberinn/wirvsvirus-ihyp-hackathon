@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useIdentityContext } from 'react-netlify-identity';
 
 import { TemplatedHelmet, Form } from '../../../components';
-import { useNavigationContext, useTheme } from '../../../context';
+import { useNavigationContext } from '../../../context';
 import { withSentry } from '../../../hocs';
 import styles from './Register.module.scss';
 import RegistrationForm from './RegistrationForm';
@@ -26,7 +26,6 @@ const errors = {
 
 export default withSentry(function RegisterRoute() {
   const { signupUser, isLoggedIn, isConfirmedUser } = useIdentityContext();
-  const { theme } = useTheme();
   const {
     routes: { LOGIN },
     PreloadingLink,
@@ -75,7 +74,6 @@ export default withSentry(function RegisterRoute() {
       data.password,
       {
         language: i18n.language,
-        theme,
       },
       false,
     )

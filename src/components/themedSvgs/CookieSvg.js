@@ -1,7 +1,6 @@
 import React from 'react';
 
 import getThemeBasedSvgColor from '../../constants/svgColor';
-import { useTheme } from '../../context';
 
 /**
  *
@@ -11,9 +10,7 @@ import { useTheme } from '../../context';
  * }} props
  */
 export default function CookieSvg({ height, className }) {
-  const { theme } = useTheme();
-
-  const { primary } = getThemeBasedSvgColor(theme);
+  const { primary } = getThemeBasedSvgColor('light');
 
   return (
     <svg

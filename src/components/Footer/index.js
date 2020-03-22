@@ -12,7 +12,6 @@ import DiscordLink from '../DiscordLink';
 import ExternalLink from '../ExternalLink';
 import GithubLink from '../GithubLink';
 import Icon from '../Icon';
-import ThemeSwitch from '../ThemeSwitch';
 import styles from './Footer.module.scss';
 
 const UnauthenticatedLinks = lazy(() =>
@@ -112,9 +111,6 @@ export default memo(
                         <Icon svg={FAQ.icon} />
                         <span>{t(FAQ.title)}</span>
                       </PreloadingLink>
-                    </li>
-                    <li>
-                      <ThemeSwitch from="footer" />
                     </li>
                     <DiscordLink from="footer" />
                     <GithubLink from="footer" />

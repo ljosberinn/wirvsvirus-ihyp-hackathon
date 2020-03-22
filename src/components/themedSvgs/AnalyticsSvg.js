@@ -1,7 +1,6 @@
 import React from 'react';
 
 import getThemeBasedSvgColor from '../../constants/svgColor';
-import { useTheme } from '../../context';
 
 /**
  *
@@ -11,11 +10,9 @@ import { useTheme } from '../../context';
  * }} props
  */
 export default function AnalyticsSvg({ height, className }) {
-  const { theme } = useTheme();
+  const { primary, purple } = getThemeBasedSvgColor('light');
 
-  const { primary, purple } = getThemeBasedSvgColor(theme);
-
-  const purpleWhenLight = theme === 'light' ? purple : '#fff';
+  const purpleWhenLight = purple;
 
   return (
     <svg
