@@ -3,7 +3,7 @@ import { Navbar as RBXNavbar } from 'rbx';
 import React, { memo, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
+import logo from './logo.png';
 import { ReactComponent as LogoIpsumSvg } from '../../assets/svg/logoIpsum.svg';
 import { BRAND_NAME } from '../../constants/env';
 import withSuspense from '../../hocs/withSuspense';
@@ -37,7 +37,7 @@ export default memo(
         >
           <RBXNavbar.Brand>
             <RBXNavbar.Item as={Link} to="/">
-              <LogoIpsumSvg aria-label={BRAND_NAME} />
+              <img src={logo} height={40} alt={'logo'} />
             </RBXNavbar.Item>
             <div
               className={classnames('navbar-burger', menuActive && 'is-active')}
