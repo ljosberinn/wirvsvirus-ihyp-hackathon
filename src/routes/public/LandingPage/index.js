@@ -92,13 +92,13 @@ export default withSentry(function LandingPage() {
                         svg={FaMobile}
                       />
                       <span className={styles.number}>
-                        <a href="tel:+015735996669">0157 - 35 99 66 69</a>
+                        <a href="tel:+4915735996669">0157 - 35 99 66 69</a>
                       </span>
                     </div>
                     <div className={styles.phone}>
                       <Icon className={styles.icon} svg={FaWhatsapp} />
                       <span className={styles.number}>
-                        <a href="tel:+0014155238886">001 415 523 - 8886</a>
+                        <a href="tel:+14155238886">001 415 523 - 8886</a>
                       </span>
                     </div>
                   </div>
