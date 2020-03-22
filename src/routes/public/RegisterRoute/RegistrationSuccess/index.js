@@ -25,7 +25,7 @@ export default function RegistrationSuccess({ mail }) {
           parent={Message.Body}
           textAlign="centered"
           ns="registration"
-          i18nKey="registration-successful"
+          i18nKey="registrationSuccessful"
           mail={mail}
         >
           <p>
