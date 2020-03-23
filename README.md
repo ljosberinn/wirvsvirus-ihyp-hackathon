@@ -21,9 +21,6 @@
 ## i18n
 
 - [react-i18next](https://github.com/i18next/react-i18next)
-- client-side detection via [i18next-browser-languagedetector](https://github.com/i18next/i18next-browser-languageDetector)
-- caching via [i18next-localstorage-backend](https://github.com/i18next/i18next-localstorage-backend)
-- retrieving via [i18next-xhr-backend](https://github.com/i18next/i18next-xhr-backend)
 
 ## Error Tracking
 
@@ -39,8 +36,12 @@
 
 ## Backend
 
-- [Netlify Functions](https://www.netlify.com/products/functions/)
-- [FaunaDB](https://fauna.com/)
+- AWS Transcribe
+- Amazon Connect
+- Google DialogFlow
+- Google Cloud Platform
+- AWS Comprehend
+- DynamoDB & Lambdas
 
 ## Auth
 
@@ -53,19 +54,10 @@
 
 ## Misc
 
-- [react-countup](https://github.com/glennreyes/react-countup)
 - [react-reveal](https://www.react-reveal.com/docs/) & [react-awesome-reveal](https://github.com/dennismorello/react-awesome-reveal)
 - [react-router](https://reacttraining.com/react-router/web/guides/quick-start)
 - [@loadable/component](https://github.com/gregberge/loadable-components)
 - [react-toastify](https://github.com/fkhadra/react-toastify)
-
-## Help translating
-
-- fork the repo
-- in /fauna-translation, navigate to the language you want to change
-- or add your language folder (copy over the file from another language and adapt the names)
-- well, translate...
-- file a Pull Request
 
 # Requirements
 
@@ -75,11 +67,11 @@
 
 # Development
 
-_Currently not supposed to be developed by anyone other than the author. Further how tos will be available once the project is in a more releasable state._
+_Not supposed to be developed by anyone other than the authors._
 
 ```bash
-git clone https://github.com/ljosberinn/personal-react-boilerplate
-cd personal-react-boilerplate
+git clone https://github.com/ljosberinn/wirvsvirus-ihyp-hackathon
+cd wirvsvirus-ihyp-hackathon
 cp .env.example .env
 # edit .env
 yarn install
