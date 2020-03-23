@@ -1,6 +1,12 @@
+@import '../../assets/scss/mixins';
+
 .map {
   width: 100%;
   height: 100%;
+
+  @include mobile {
+    min-height: 100vh;
+  }
 
   .mapContainer {
     width: 100%;
@@ -24,8 +30,6 @@
       cursor: pointer;
     }
   }
-
-
 }
 
 .tippy-box {
@@ -51,7 +55,7 @@
 
   .cardHeader {
     box-shadow: none;
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
 
     .cardHeaderTitle {
       display: flex;
