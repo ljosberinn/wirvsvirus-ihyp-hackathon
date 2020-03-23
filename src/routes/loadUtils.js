@@ -9,7 +9,7 @@ import { Loader } from '../components';
  * @param {Promise<React.ComponentType>} component
  * @param {number} delay
  */
-export const withMaxDelay = (component, delay = 5000) =>
+export const withMaxDelay = (component, delay = 10000) =>
   timeout(component, delay);
 
 export default component =>
