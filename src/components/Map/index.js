@@ -14,8 +14,8 @@ import toast from '../../utils/toast';
 import styles from './Map.module.scss';
 
 const defaultLocation = {
-  lng: 11.576124,
-  lat: 48.137154,
+  lng: 11.589048,
+  lat: 48.117254,
 };
 
 const defaultStyle = 'mapbox://styles/retinadesign/ck81gqhvb0pg11io6607jo0xo';
@@ -52,6 +52,9 @@ export default function Map({
         center={[fallbackLocation.lng, fallbackLocation.lat]}
         style={mapStyle}
         className={styles.mapContainer}
+        onStyleLoad={() => {
+          window.dispatchEvent(new Event('resize'));
+        }}
       >
         <MapBody requests={requests} />
       </Map>
