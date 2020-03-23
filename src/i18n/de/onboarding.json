@@ -20,6 +20,7 @@
   "photo": "Foto",
   "request-photo": "Lade bitte noch ein Foto von Dir hoch, damit unsere Hilfesuchenden Dich erkennen",
   "upload-security-label": "Ich versichere, dass das Bild folgenden Kriterien entspricht.",
+  "upload-help-0": "das Bild ist kleiner als 1 MB",
   "upload-help-1": "das Bild zeigt meine Person",
   "upload-help-2": "das Bild wurde in akzeptablem Licht aufgenommen",
   "upload-help-3": "das Bild ist jugendfrei",

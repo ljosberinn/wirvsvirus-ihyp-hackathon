@@ -7,7 +7,12 @@ import { FaUpload } from 'react-icons/fa';
 import { Icon, Checkbox } from '../../../../../components';
 import styles from './ImageStep.module.scss';
 
-export default function ImageStep({ handleChange, img, imgSecurity }) {
+export default function ImageStep({
+  handleChange,
+  img,
+  imgSecurity,
+  imgError,
+}) {
   const { t } = useTranslation('onboarding');
 
   function removeImage() {
@@ -36,6 +41,12 @@ export default function ImageStep({ handleChange, img, imgSecurity }) {
             </File.Label>
           )}
         </File>
+        {imgError && (
+          <Help textAlign="centered" color="danger">
+            Das Bild ist leider zu groß, bitte wähle ein Bild aus, das kleiner
+            als 1MB ist.
+          </Help>
+        )}
         <Block className={styles.block}>
           <Message>
             <Message.Body>
@@ -48,6 +59,9 @@ export default function ImageStep({ handleChange, img, imgSecurity }) {
               />
               <Label htmlFor="imgSecurity">{t('upload-security-label')}</Label>
               <ul className={styles.list}>
+                <li>
+                  <Help>{t('upload-help-0')}</Help>
+                </li>
                 <li>
                   <Help>{t('upload-help-1')}</Help>
                 </li>
