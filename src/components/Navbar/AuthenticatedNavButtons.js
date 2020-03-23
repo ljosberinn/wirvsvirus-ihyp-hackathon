@@ -23,9 +23,9 @@ export default withSuspense(function AuthenticatedNavButtons() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user.user_metadata.guardian) {
-      getGuardian(user.id).then(setGuardian);
-    }
+    getGuardian(user.id)
+      .then(setGuardian)
+      .catch(console.error);
   }, [user]);
 
   function handleLogout() {
@@ -33,17 +33,6 @@ export default withSuspense(function AuthenticatedNavButtons() {
     setIsLoggingOut(true);
 
     logoutUser();
-  }
-
-  function renderAvatar() {
-    return (
-      <div>
-        <div className={styles.name}>
-          {guardian.firstName} {guardian.lastName}
-        </div>
-        <div className={styles.karma}>Karma {guardian.karma}</div>
-      </div>
-    );
   }
 
   if (!guardian) {
@@ -59,7 +48,14 @@ export default withSuspense(function AuthenticatedNavButtons() {
               <Image.Container size={32}>
                 <Image src={guardian ? guardian.img : undefined} rounded />
               </Image.Container>
-              <span>{renderAvatar()}</span>
+              <span>
+                <div>
+                  <div className={styles.name}>
+                    {guardian.firstName} {guardian.lastName}
+                  </div>
+                  <div className={styles.karma}>Karma {guardian.karma}</div>
+                </div>
+              </span>
               <Icon svg={FaAngleDown} />
             </div>
           </Dropdown.Trigger>
