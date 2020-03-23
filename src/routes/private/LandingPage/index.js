@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Map } from '../../../components';
+import { Map, TemplatedHelmet } from '../../../components';
 import { GOOGLE_MAPS_KEY } from '../../../constants/env';
 import { withSentry } from '../../../hocs';
 import { getAllRequests } from '../../../services/RequestService';
@@ -36,10 +36,23 @@ export default withSentry(function LandingPage() {
           })),
         );
 
-        setRequests(sanitizedRequests.filter((request) => request.requestState === 'pending' || request.requestState === 'progress'));
+        setRequests(
+          sanitizedRequests.filter(
+            request =>
+              request.requestState === 'pending' ||
+              request.requestState === 'progress',
+          ),
+        );
       })
       .catch(console.error);
   }, []);
 
-  return <Map requests={requests} />;
+  return (
+    <>
+      <TemplatedHelmet>
+        <title>Übersicht</title>
+      </TemplatedHelmet>
+      <Map requests={requests} />
+    </>
+  );
 });
