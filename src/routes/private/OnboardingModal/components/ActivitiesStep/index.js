@@ -54,6 +54,7 @@ export default function ActivitiesStep({
         <Control iconLeft>
           <Icon svg={FaSearch} />
           <Input
+            type="text"
             id="address"
             list="address-datalist"
             defaultValue={address}

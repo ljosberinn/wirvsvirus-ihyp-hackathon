@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { Input } from 'rbx';
+import { Input, Label } from 'rbx';
 import React from 'react';
 
 import styles from '../RequestPage.module.scss';
@@ -10,6 +10,8 @@ export default function StepThree({ values, onChange }) {
       <div className={styles.stepTitle}>Wie können wir dich finden?</div>
       <div className={styles.stepContent}>
         <div className={styles.zip}>
+          <Label htmlFor="zip">PLZ</Label>
+
           <Input
             type="text"
             placeholder="80331"
@@ -20,6 +22,7 @@ export default function StepThree({ values, onChange }) {
           />
         </div>
         <div className={styles.street}>
+          <Label htmlFor="street">Straße</Label>
           <Input
             type="text"
             placeholder="Domagkstraße 12"
