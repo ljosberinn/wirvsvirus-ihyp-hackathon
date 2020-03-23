@@ -1,18 +1,16 @@
 import Tippy from '@tippyjs/react';
 import PropTypes from 'prop-types';
 import { Card, Button, Content } from 'rbx';
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import { useIdentityContext } from 'react-netlify-identity';
-import { useGeolocation } from 'react-use';
-import 'tippy.js/dist/tippy.css'; // optional
+import 'tippy.js/dist/tippy.css';
 
 import { useNavigate } from '../../hooks';
 import { TASKS } from '../../routes/private';
 import { updateRequest } from '../../services/RequestService';
 import toast from '../../utils/toast';
-import Loader from '../Loader';
 import styles from './Map.module.scss';
 
 const defaultLocation = {
@@ -29,7 +27,6 @@ export default function Map({
   requests = [],
   mapStyle = defaultStyle,
   fallbackLocation = defaultLocation,
-  forceFallback = false,
 }) {
   const Map = useMemo(
     () =>
@@ -39,40 +36,20 @@ export default function Map({
     [accessToken],
   );
 
-  const { latitude, longitude, loading } = useGeolocation({
-    enableHighAccuracy: true,
-    timeout: 2500,
-  });
-
-  const [location, setLocation] = useState({ lng: null, lat: null, zoom: 13 });
-
   useEffect(() => {
-    if (loading) {
-      return;
-    }
+    // fixes sometimes broken mobile width
+    const timeout = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 350);
 
-    if (!location.lng && !location.lat) {
-      const lng = longitude || fallbackLocation.lng;
-      const lat = latitude || fallbackLocation.lat;
-
-      setLocation({
-        lng: forceFallback ? fallbackLocation.lng : lng,
-        lat: forceFallback ? fallbackLocation.lat : lat,
-      });
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, location.lat, location.lng]);
-
-  if (loading || !location.lng || !location.lat) {
-    return <Loader />;
-  }
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div className={styles.map}>
       <Map
         zoom={[13]}
-        center={[location.lng, location.lat]}
+        center={[fallbackLocation.lng, fallbackLocation.lat]}
         style={mapStyle}
         className={styles.mapContainer}
       >
@@ -220,5 +197,4 @@ function RequestModal({
 Map.propTypes = {
   requests: PropTypes.array,
   mapStype: PropTypes.string,
-  forceFallback: PropTypes.bool,
 };
