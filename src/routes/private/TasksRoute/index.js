@@ -89,61 +89,65 @@ export default withSentry(function TasksRoute() {
         <Box shadowless>
           <Title id="section-title">{t('tasks')}</Title>
 
-          <Table fullwidth narrow striped hoverable>
-            <thead>
-              <tr>
-                <th>Status</th>
-                <th>Datum</th>
-                <th>Hilfesuchender</th>
-                <th>Anruf</th>
-                <th>Typ</th>
-                <th>Mail</th>
-                <th>Addresse</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {requests.map(request => {
-                const {
-                  id,
-                  date,
-                  audio,
-                  completeName,
-                  task,
-                  email,
-                  city,
-                  zip,
-                  street,
-                } = request;
+          {requests.length > 0 ? (
+            <Table fullwidth narrow striped hoverable>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Datum</th>
+                  <th>Hilfesuchender</th>
+                  <th>Anruf</th>
+                  <th>Typ</th>
+                  <th>Mail</th>
+                  <th>Addresse</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {requests.map(request => {
+                  const {
+                    id,
+                    date,
+                    audio,
+                    completeName,
+                    task,
+                    email,
+                    city,
+                    zip,
+                    street,
+                  } = request;
 
-                return (
-                  <tr key={id}>
-                    <td className={styles.requestState}>
-                      <div className={styles[request.requestState]}>
-                        {translateStatus(request.requestState)}
-                      </div>
-                    </td>
-                    <td>{date}</td>
-                    <td>{completeName}</td>
-                    <td>
-                      {audio && (
-                        <audio controls src={audio} preload="metadata">
-                          Ihr Browser unterstützt leider keine Audiodateien.
-                        </audio>
-                      )}
-                    </td>
-                    <td>{task}</td>
-                    <td>{email}</td>
-                    <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
-                    <td>{renderControls(request)}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-            <tfoot>
-              <tr></tr>
-            </tfoot>
-          </Table>
+                  return (
+                    <tr key={id}>
+                      <td className={styles.requestState}>
+                        <div className={styles[request.requestState]}>
+                          {translateStatus(request.requestState)}
+                        </div>
+                      </td>
+                      <td>{date}</td>
+                      <td>{completeName}</td>
+                      <td>
+                        {audio && (
+                          <audio controls src={audio} preload="metadata">
+                            Ihr Browser unterstützt leider keine Audiodateien.
+                          </audio>
+                        )}
+                      </td>
+                      <td>{task}</td>
+                      <td>{email}</td>
+                      <td>{[city, zip, street].filter(Boolean).join(' ')}</td>
+                      <td>{renderControls(request)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+              <tfoot>
+                <tr></tr>
+              </tfoot>
+            </Table>
+          ) : (
+            'Derzeit hast Du keine Aufgaben.'
+          )}
         </Box>
       </Section>
     </>
