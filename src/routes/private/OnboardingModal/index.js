@@ -46,21 +46,19 @@ const initialState = {
   },
 };
 
-const validateCurrentStep = (data, currentStep) => {
-  switch (currentStep) {
-    case 0:
-      const { title, firstName, lastName, phone } = Object.values(data)[
-        currentStep
-      ];
+const validateCurrentStep = (data, key) => {
+  switch (key) {
+    case steps[0].name:
+      const { title, firstName, lastName, phone } = data[key];
 
       return !!title && !!firstName && !!lastName && !!phone;
-    case 1:
-      const { radius, address, activities } = Object.values(data)[currentStep];
+    case steps[1].name:
+      const { radius, address, activities } = data[key];
 
       return radius >= 1 && radius <= 20 && !!address && activities.length > 0;
 
-    case 2:
-      const { img, imgSecurity } = Object.values(data)[currentStep];
+    case steps[2].name:
+      const { img, imgSecurity } = data[key];
 
       return !!img && imgSecurity;
     default:
@@ -259,7 +257,7 @@ export default withSentry(function OnboardingModal() {
                     handleStepChange={handleStepChange}
                     mayCurrentlyContinue={validateCurrentStep(
                       data,
-                      currentStep,
+                      steps[currentStep].name,
                     )}
                     isLoading={isLoading}
                   />
