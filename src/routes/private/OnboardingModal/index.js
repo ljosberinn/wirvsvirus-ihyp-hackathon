@@ -255,6 +255,7 @@ export default withSentry(function OnboardingModal() {
                 ))}
                 actions={
                   <StepActions
+                    key={Math.random()}
                     currentStep={currentStep}
                     handleStepChange={handleStepChange}
                     mayCurrentlyContinue={validateCurrentStep(
