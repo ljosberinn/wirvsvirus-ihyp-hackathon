@@ -13,6 +13,7 @@ export default function StepActions({
   isLoading,
   mayCurrentlyContinue,
 }) {
+  console.log({currentStep, mayCurrentlyContinue});
   const { t } = useTranslation('onboarding');
 
   function handleGoBack() {
