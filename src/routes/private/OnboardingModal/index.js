@@ -49,12 +49,9 @@ const initialState = {
 const validateCurrentStep = (data, currentStep) => {
   switch (currentStep) {
     case 0:
-      console.log({data});
       const { title, firstName, lastName, phone } = Object.values(data)[
         currentStep
       ];
-
-      console.log({title, firstName, lastName, phone, currentStep}, 'hi mat', {title: !!title, firstName: !!firstName, lastName: !!lastName, phone: !!phone });
 
       return !!title && !!firstName && !!lastName && !!phone;
     case 1:
